@@ -150,6 +150,7 @@
             this.Name = "appStarter";
             this.Text = "Pozwolenia na pracę";
             this.Load += new System.EventHandler(this.formLoaded);
+            this.Shown += new System.EventHandler(this.appStarter_Shown);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FormKeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.dgWorkPermits)).EndInit();
             this.tplMain.ResumeLayout(false);

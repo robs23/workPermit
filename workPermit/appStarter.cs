@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Squirrel;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -178,6 +179,35 @@ namespace workPermit
                     cm.Show(dg, dg.PointToClient(Cursor.Position));
                 }
             }
+        }
+
+        private async void appStarter_Shown(object sender, EventArgs e)
+        {
+            this.Text = "WorkPermit v." + System.Windows.Forms.Application.ProductVersion;
+#if (DEBUG == false)
+            ReleaseEntry release = null;
+            using (var mgr = new UpdateManager(Static.Secrets.SquirrelUpdatePath))
+            {
+                //SquirrelAwareApp.HandleEvents(
+                //onInitialInstall: v =>
+                //{
+                //    mgr.CreateShortcutForThisExe();
+                //    mgr.CreateRunAtWindowsStartupRegistry();
+                //},
+                //onAppUninstall: v =>
+                //{
+                //    mgr.RemoveShortcutForThisExe();
+                //    mgr.RemoveRunAtWindowsStartupRegistry();
+                //});
+                release = await mgr.UpdateApp();
+            }
+            if (release != null)
+            {
+                MessageBox.Show("Aplikacja została zaktualizowana do nowszej wersji. Naciśnij OK aby zrestartować aplikację", "Aktualizacja", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //force app restart
+                UpdateManager.RestartApp();
+            }
+#endif
         }
     }
 }
