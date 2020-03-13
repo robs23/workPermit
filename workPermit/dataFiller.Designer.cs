@@ -407,6 +407,7 @@
             this.dtDate.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.dtDate.DropDownAlign = System.Windows.Forms.LeftRightAlignment.Right;
             this.dtDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.dtDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtDate.Location = new System.Drawing.Point(203, 39);
             this.dtDate.Name = "dtDate";
             this.dtDate.Size = new System.Drawing.Size(395, 26);
