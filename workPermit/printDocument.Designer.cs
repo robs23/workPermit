@@ -50,10 +50,12 @@
             this.txtDepartment = new System.Windows.Forms.TextBox();
             this.pBox = new System.Windows.Forms.PictureBox();
             this.pnlP2 = new System.Windows.Forms.Panel();
-            this.pBox2 = new System.Windows.Forms.PictureBox();
-            this.txtApplicant3 = new System.Windows.Forms.TextBox();
-            this.txtAuthorizing3 = new System.Windows.Forms.TextBox();
             this.txtHolder3 = new System.Windows.Forms.TextBox();
+            this.txtAuthorizing3 = new System.Windows.Forms.TextBox();
+            this.txtApplicant3 = new System.Windows.Forms.TextBox();
+            this.pBox2 = new System.Windows.Forms.PictureBox();
+            this.txtUser7 = new System.Windows.Forms.TextBox();
+            this.txtUser8 = new System.Windows.Forms.TextBox();
             this.pnlP1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pBox)).BeginInit();
             this.pnlP2.SuspendLayout();
@@ -64,6 +66,8 @@
             // 
             this.pnlP1.AutoScroll = true;
             this.pnlP1.AutoSize = true;
+            this.pnlP1.Controls.Add(this.txtUser8);
+            this.pnlP1.Controls.Add(this.txtUser7);
             this.pnlP1.Controls.Add(this.txtWorkDescription);
             this.pnlP1.Controls.Add(this.txtUser6);
             this.pnlP1.Controls.Add(this.txtUser5);
@@ -113,7 +117,7 @@
             // 
             this.txtUser5.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtUser5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.txtUser5.Location = new System.Drawing.Point(806, 191);
+            this.txtUser5.Location = new System.Drawing.Point(806, 186);
             this.txtUser5.Name = "txtUser5";
             this.txtUser5.Size = new System.Drawing.Size(160, 14);
             this.txtUser5.TabIndex = 16;
@@ -143,7 +147,7 @@
             // 
             this.txtUser2.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtUser2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.txtUser2.Location = new System.Drawing.Point(654, 192);
+            this.txtUser2.Location = new System.Drawing.Point(653, 186);
             this.txtUser2.Name = "txtUser2";
             this.txtUser2.Size = new System.Drawing.Size(134, 14);
             this.txtUser2.TabIndex = 13;
@@ -163,7 +167,7 @@
             // 
             this.txtHolderCompany.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtHolderCompany.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.txtHolderCompany.Location = new System.Drawing.Point(509, 192);
+            this.txtHolderCompany.Location = new System.Drawing.Point(509, 186);
             this.txtHolderCompany.Name = "txtHolderCompany";
             this.txtHolderCompany.Size = new System.Drawing.Size(117, 14);
             this.txtHolderCompany.TabIndex = 11;
@@ -256,11 +260,12 @@
             // 
             this.txtLocal.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtLocal.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.txtLocal.Location = new System.Drawing.Point(160, 168);
+            this.txtLocal.Location = new System.Drawing.Point(161, 168);
             this.txtLocal.Name = "txtLocal";
             this.txtLocal.Size = new System.Drawing.Size(100, 14);
             this.txtLocal.TabIndex = 2;
             this.txtLocal.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtLocal.TextChanged += new System.EventHandler(this.txtLocal_TextChanged);
             // 
             // txtDepartment
             // 
@@ -295,15 +300,21 @@
             this.pnlP2.TabIndex = 1;
             this.pnlP2.Visible = false;
             // 
-            // pBox2
+            // txtHolder3
             // 
-            this.pBox2.Image = ((System.Drawing.Image)(resources.GetObject("pBox2.Image")));
-            this.pBox2.Location = new System.Drawing.Point(-3, 1);
-            this.pBox2.Name = "pBox2";
-            this.pBox2.Size = new System.Drawing.Size(1038, 1456);
-            this.pBox2.TabIndex = 0;
-            this.pBox2.TabStop = false;
-            this.pBox2.Click += new System.EventHandler(this.pBox2_Click);
+            this.txtHolder3.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtHolder3.Location = new System.Drawing.Point(658, 372);
+            this.txtHolder3.Name = "txtHolder3";
+            this.txtHolder3.Size = new System.Drawing.Size(142, 13);
+            this.txtHolder3.TabIndex = 3;
+            // 
+            // txtAuthorizing3
+            // 
+            this.txtAuthorizing3.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtAuthorizing3.Location = new System.Drawing.Point(658, 355);
+            this.txtAuthorizing3.Name = "txtAuthorizing3";
+            this.txtAuthorizing3.Size = new System.Drawing.Size(142, 13);
+            this.txtAuthorizing3.TabIndex = 2;
             // 
             // txtApplicant3
             // 
@@ -314,21 +325,35 @@
             this.txtApplicant3.Size = new System.Drawing.Size(142, 14);
             this.txtApplicant3.TabIndex = 1;
             // 
-            // txtAuthorizing3
+            // pBox2
             // 
-            this.txtAuthorizing3.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtAuthorizing3.Location = new System.Drawing.Point(658, 355);
-            this.txtAuthorizing3.Name = "txtAuthorizing3";
-            this.txtAuthorizing3.Size = new System.Drawing.Size(142, 13);
-            this.txtAuthorizing3.TabIndex = 2;
+            this.pBox2.Image = ((System.Drawing.Image)(resources.GetObject("pBox2.Image")));
+            this.pBox2.Location = new System.Drawing.Point(-3, 1);
+            this.pBox2.Name = "pBox2";
+            this.pBox2.Size = new System.Drawing.Size(1038, 1456);
+            this.pBox2.TabIndex = 0;
+            this.pBox2.TabStop = false;
+            this.pBox2.Click += new System.EventHandler(this.pBox2_Click);
             // 
-            // txtHolder3
+            // txtUser7
             // 
-            this.txtHolder3.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtHolder3.Location = new System.Drawing.Point(658, 372);
-            this.txtHolder3.Name = "txtHolder3";
-            this.txtHolder3.Size = new System.Drawing.Size(142, 13);
-            this.txtHolder3.TabIndex = 3;
+            this.txtUser7.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtUser7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.txtUser7.Location = new System.Drawing.Point(655, 201);
+            this.txtUser7.Name = "txtUser7";
+            this.txtUser7.Size = new System.Drawing.Size(134, 14);
+            this.txtUser7.TabIndex = 19;
+            this.txtUser7.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // txtUser8
+            // 
+            this.txtUser8.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtUser8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.txtUser8.Location = new System.Drawing.Point(807, 201);
+            this.txtUser8.Name = "txtUser8";
+            this.txtUser8.Size = new System.Drawing.Size(160, 14);
+            this.txtUser8.TabIndex = 20;
+            this.txtUser8.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // frmP1
             // 
@@ -336,8 +361,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(755, 518);
-            this.Controls.Add(this.pnlP2);
             this.Controls.Add(this.pnlP1);
+            this.Controls.Add(this.pnlP2);
             this.Name = "frmP1";
             this.Text = "Strona 1";
             this.Load += new System.EventHandler(this.formLoaded);
@@ -379,6 +404,8 @@
         private System.Windows.Forms.TextBox txtHolder3;
         private System.Windows.Forms.TextBox txtAuthorizing3;
         private System.Windows.Forms.TextBox txtApplicant3;
+        private System.Windows.Forms.TextBox txtUser8;
+        private System.Windows.Forms.TextBox txtUser7;
     }
 }
 

@@ -118,8 +118,8 @@
     <Compile Include="Static\Secrets.cs" />
     <Compile Include="Utility.cs" />
     <Compile Include="Variables.cs" />
-    <Compile Include="WorkPermit.cs" />
-    <Compile Include="WorkPermitKeeper.cs" />
+    <Compile Include="Models\WorkPermit.cs" />
+    <Compile Include="Models\WorkPermitKeeper.cs" />
     <EmbeddedResource Include="appStarter.resx">
       <DependentUpon>appStarter.cs</DependentUpon>
     </EmbeddedResource>

@@ -44,25 +44,44 @@ namespace workPermit
             txtHolderPhone.Text = thisPermit.CompanyPhone;
             txtPerminNumber.Text = thisPermit.Number;
             txtWorkDescription.Text = thisPermit.Description;
+            SetUsers();
+            pc = new printController(this);
+            pc.StartPosition = FormStartPosition.CenterParent;
+            pc.Show(this);
+
+        }
+
+        private void SetUsers()
+        {
             txtUser1.Text = "";
             txtUser2.Text = "";
             txtUser3.Text = "";
             txtUser4.Text = "";
             txtUser5.Text = "";
             txtUser6.Text = "";
+            bool insertComa = false;
             if (thisPermit.Users.Any())
             {
                 int i = 0;
-                foreach(var u in thisPermit.Users)
+                foreach (var u in thisPermit.Users)
                 {
                     i++;
-                    pnlP1.Controls["txtUser" + i.ToString()].Text = u;
+                    if (i % 8 == 0)
+                    {
+                        insertComa = true;
+                        i = 1;
+                    }
+                    if (insertComa)
+                    {
+                        pnlP1.Controls["txtUser" + i.ToString()].Text += "," + u;
+                    }
+                    else
+                    {
+                        pnlP1.Controls["txtUser" + i.ToString()].Text += u;
+                    }
+                    
                 }
             }
-            pc = new printController(this);
-            pc.StartPosition = FormStartPosition.CenterParent;
-            pc.Show(this);
-
         }
 
         public void printMe()
@@ -126,6 +145,11 @@ namespace workPermit
         }
 
         private void pBox2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtLocal_TextChanged(object sender, EventArgs e)
         {
 
         }
