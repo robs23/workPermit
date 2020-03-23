@@ -58,6 +58,10 @@ namespace workPermit
                                 Applicant = reader["applicant"].ToString(),
                                 Holder = reader["holder"].ToString(),
                                 Authorizing = reader["authorizing"].ToString(),
+                                AuthorizingPPN = reader["authorizingPPN"].ToString(),
+                                AuthorizingPZ = reader["authorizingPZ"].ToString(),
+                                AuthorizingPNW = reader["authorizingPNW"].ToString(),
+                                ControllerPPN = reader["controllerPPN"].ToString(),
                                 DateAdded = reader.GetDateTime(reader.GetOrdinal("dateAdded")),
                                 Users = reader["users"].ToString().Split(',').ToList()
 
@@ -143,6 +147,10 @@ namespace workPermit
                         break;
                     case "Applicant":
                     case "Authorizing":
+                    case "AuthorizingPPN":
+                    case "AuthorizingPZ":
+                    case "AuthorizingPNW":
+                    case "ControllerPPN":
                     case "Holder":
                     case "Users":
                         if (!AcList.Contains(wp.Applicant))
@@ -152,6 +160,22 @@ namespace workPermit
                         if (!AcList.Contains(wp.Authorizing))
                         {
                             AcList.Add(wp.Authorizing);
+                        }
+                        if (!AcList.Contains(wp.AuthorizingPPN))
+                        {
+                            AcList.Add(wp.AuthorizingPPN);
+                        }
+                        if (!AcList.Contains(wp.AuthorizingPZ))
+                        {
+                            AcList.Add(wp.AuthorizingPZ);
+                        }
+                        if (!AcList.Contains(wp.AuthorizingPNW))
+                        {
+                            AcList.Add(wp.AuthorizingPNW);
+                        }
+                        if (!AcList.Contains(wp.ControllerPPN))
+                        {
+                            AcList.Add(wp.ControllerPPN);
                         }
                         if (!AcList.Contains(wp.Holder))
                         {

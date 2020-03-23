@@ -42,6 +42,10 @@ namespace workPermit
                 dtDate.Value = wp.Date;
                 txtUsers.Text = wp.GetUsers();
                 txtAuthorizing.Text = wp.Authorizing;
+                txtAuthorizingPPN.Text = wp.AuthorizingPPN;
+                txtAuthorizingPZ.Text = wp.AuthorizingPZ;
+                txtAuthorizingPNW.Text = wp.AuthorizingPNW;
+                txtControllerPPN.Text = wp.ControllerPPN;
                 cmbFrom.Text = wp.HourFrom;
                 cmbTo.Text = wp.HourTo;
                 if (copy)
@@ -74,6 +78,14 @@ namespace workPermit
             AC = new AutoComplete(txtApplicant, Keeper.AutoCompleteCollection("Applicant"), ACKeeper);
             ACKeeper.Append(AC);
             AC = new AutoComplete(txtAuthorizing, Keeper.AutoCompleteCollection("Authorizing"), ACKeeper);
+            ACKeeper.Append(AC);
+            AC = new AutoComplete(txtAuthorizingPPN, Keeper.AutoCompleteCollection("AuthorizingPPN"), ACKeeper);
+            ACKeeper.Append(AC);
+            AC = new AutoComplete(txtAuthorizingPZ, Keeper.AutoCompleteCollection("AuthorizingPZ"), ACKeeper);
+            ACKeeper.Append(AC);
+            AC = new AutoComplete(txtAuthorizingPNW, Keeper.AutoCompleteCollection("AuthorizingPNW"), ACKeeper);
+            ACKeeper.Append(AC);
+            AC = new AutoComplete(txtControllerPPN, Keeper.AutoCompleteCollection("ControllerPPN"), ACKeeper);
             ACKeeper.Append(AC);
             AC = new AutoComplete(txtHolder, Keeper.AutoCompleteCollection("Holder"), ACKeeper);
             ACKeeper.Append(AC);
@@ -116,6 +128,10 @@ namespace workPermit
             wp.HourTo = cmbTo.Text;
             wp.Applicant = txtApplicant.Text;
             wp.Authorizing = txtAuthorizing.Text;
+            wp.AuthorizingPPN = txtAuthorizingPPN.Text;
+            wp.AuthorizingPZ = txtAuthorizingPZ.Text;
+            wp.AuthorizingPNW = txtAuthorizingPNW.Text;
+            wp.ControllerPPN = txtControllerPPN.Text;
             wp.CompanyName = txtCompany.Text;
             wp.CompanyPhone = txtPhone.Text;
             wp.Department = txtDepartment.Text;
@@ -125,5 +141,9 @@ namespace workPermit
             wp.Users = txtUsers.Text.Split(',').ToList();
         }
 
+        private void label16_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

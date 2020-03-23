@@ -62,6 +62,14 @@
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnPreview = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.txtControllerPPN = new System.Windows.Forms.TextBox();
+            this.txtAuthorizingPPN = new System.Windows.Forms.TextBox();
+            this.txtAuthorizingPZ = new System.Windows.Forms.TextBox();
+            this.txtAuthorizingPNW = new System.Windows.Forms.TextBox();
             this.tplMain.SuspendLayout();
             this.tpl.SuspendLayout();
             this.tplHours.SuspendLayout();
@@ -80,9 +88,9 @@
             this.tplMain.Location = new System.Drawing.Point(3, 4);
             this.tplMain.Name = "tplMain";
             this.tplMain.RowCount = 2;
-            this.tplMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 460F));
             this.tplMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tplMain.Size = new System.Drawing.Size(607, 538);
+            this.tplMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60F));
+            this.tplMain.Size = new System.Drawing.Size(607, 700);
             this.tplMain.TabIndex = 0;
             // 
             // tpl
@@ -117,9 +125,17 @@
             this.tpl.Controls.Add(this.txtAuthorizing, 1, 11);
             this.tpl.Controls.Add(this.dtDate, 1, 1);
             this.tpl.Controls.Add(this.tplHours, 1, 2);
+            this.tpl.Controls.Add(this.label15, 0, 12);
+            this.tpl.Controls.Add(this.label16, 0, 13);
+            this.tpl.Controls.Add(this.label17, 0, 14);
+            this.tpl.Controls.Add(this.label18, 0, 15);
+            this.tpl.Controls.Add(this.txtControllerPPN, 1, 12);
+            this.tpl.Controls.Add(this.txtAuthorizingPPN, 1, 13);
+            this.tpl.Controls.Add(this.txtAuthorizingPZ, 1, 14);
+            this.tpl.Controls.Add(this.txtAuthorizingPNW, 1, 15);
             this.tpl.Location = new System.Drawing.Point(3, 3);
             this.tpl.Name = "tpl";
-            this.tpl.RowCount = 13;
+            this.tpl.RowCount = 17;
             this.tpl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
             this.tpl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
             this.tpl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
@@ -133,7 +149,11 @@
             this.tpl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
             this.tpl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
             this.tpl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
-            this.tpl.Size = new System.Drawing.Size(601, 454);
+            this.tpl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
+            this.tpl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
+            this.tpl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
+            this.tpl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
+            this.tpl.Size = new System.Drawing.Size(601, 634);
             this.tpl.TabIndex = 1;
             // 
             // label1
@@ -599,12 +619,12 @@
             this.tplButtons.Controls.Add(this.btnCancel, 1, 0);
             this.tplButtons.Controls.Add(this.btnPreview, 2, 0);
             this.tplButtons.Controls.Add(this.btnSave, 3, 0);
-            this.tplButtons.Location = new System.Drawing.Point(3, 463);
+            this.tplButtons.Location = new System.Drawing.Point(3, 643);
             this.tplButtons.Name = "tplButtons";
             this.tplButtons.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
             this.tplButtons.RowCount = 1;
             this.tplButtons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tplButtons.Size = new System.Drawing.Size(601, 72);
+            this.tplButtons.Size = new System.Drawing.Size(601, 54);
             this.tplButtons.TabIndex = 2;
             // 
             // btnCancel
@@ -613,7 +633,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.BackColor = System.Drawing.Color.LightCoral;
             this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.btnCancel.Location = new System.Drawing.Point(311, 27);
+            this.btnCancel.Location = new System.Drawing.Point(311, 9);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(10, 3, 10, 15);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(80, 30);
@@ -626,7 +646,7 @@
             this.btnPreview.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btnPreview.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.btnPreview.Location = new System.Drawing.Point(411, 27);
+            this.btnPreview.Location = new System.Drawing.Point(411, 9);
             this.btnPreview.Margin = new System.Windows.Forms.Padding(10, 3, 10, 15);
             this.btnPreview.Name = "btnPreview";
             this.btnPreview.Size = new System.Drawing.Size(80, 30);
@@ -641,7 +661,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSave.BackColor = System.Drawing.Color.YellowGreen;
             this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.btnSave.Location = new System.Drawing.Point(511, 27);
+            this.btnSave.Location = new System.Drawing.Point(511, 9);
             this.btnSave.Margin = new System.Windows.Forms.Padding(10, 3, 10, 15);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(80, 30);
@@ -650,11 +670,108 @@
             this.btnSave.UseVisualStyleBackColor = false;
             this.btnSave.Click += new System.EventHandler(this.Save);
             // 
+            // label15
+            // 
+            this.label15.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label15.Location = new System.Drawing.Point(3, 453);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(194, 18);
+            this.label15.TabIndex = 25;
+            this.label15.Text = "PPN - Obserwator obszaru";
+            this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label16
+            // 
+            this.label16.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label16.AutoSize = true;
+            this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label16.Location = new System.Drawing.Point(3, 488);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(194, 18);
+            this.label16.TabIndex = 26;
+            this.label16.Text = "PPN - Zatwierdzający";
+            this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label16.Click += new System.EventHandler(this.label16_Click);
+            // 
+            // label17
+            // 
+            this.label17.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label17.Location = new System.Drawing.Point(3, 523);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(194, 18);
+            this.label17.TabIndex = 27;
+            this.label17.Text = "PZ - Zatwierdzający";
+            this.label17.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label18
+            // 
+            this.label18.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label18.AutoSize = true;
+            this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label18.Location = new System.Drawing.Point(3, 558);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(194, 18);
+            this.label18.TabIndex = 28;
+            this.label18.Text = "PNW - Zatwierdzający";
+            this.label18.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // txtControllerPPN
+            // 
+            this.txtControllerPPN.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtControllerPPN.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.txtControllerPPN.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.txtControllerPPN.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.txtControllerPPN.Location = new System.Drawing.Point(203, 449);
+            this.txtControllerPPN.MaxLength = 50;
+            this.txtControllerPPN.Name = "txtControllerPPN";
+            this.txtControllerPPN.Size = new System.Drawing.Size(395, 26);
+            this.txtControllerPPN.TabIndex = 29;
+            // 
+            // txtAuthorizingPPN
+            // 
+            this.txtAuthorizingPPN.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtAuthorizingPPN.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.txtAuthorizingPPN.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.txtAuthorizingPPN.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.txtAuthorizingPPN.Location = new System.Drawing.Point(203, 484);
+            this.txtAuthorizingPPN.MaxLength = 50;
+            this.txtAuthorizingPPN.Name = "txtAuthorizingPPN";
+            this.txtAuthorizingPPN.Size = new System.Drawing.Size(395, 26);
+            this.txtAuthorizingPPN.TabIndex = 30;
+            // 
+            // txtAuthorizingPZ
+            // 
+            this.txtAuthorizingPZ.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtAuthorizingPZ.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.txtAuthorizingPZ.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.txtAuthorizingPZ.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.txtAuthorizingPZ.Location = new System.Drawing.Point(203, 519);
+            this.txtAuthorizingPZ.MaxLength = 50;
+            this.txtAuthorizingPZ.Name = "txtAuthorizingPZ";
+            this.txtAuthorizingPZ.Size = new System.Drawing.Size(395, 26);
+            this.txtAuthorizingPZ.TabIndex = 31;
+            // 
+            // txtAuthorizingPNW
+            // 
+            this.txtAuthorizingPNW.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtAuthorizingPNW.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.txtAuthorizingPNW.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.txtAuthorizingPNW.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.txtAuthorizingPNW.Location = new System.Drawing.Point(203, 554);
+            this.txtAuthorizingPNW.MaxLength = 50;
+            this.txtAuthorizingPNW.Name = "txtAuthorizingPNW";
+            this.txtAuthorizingPNW.Size = new System.Drawing.Size(395, 26);
+            this.txtAuthorizingPNW.TabIndex = 32;
+            // 
             // dataFiller
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(611, 543);
+            this.ClientSize = new System.Drawing.Size(611, 705);
             this.Controls.Add(this.tplMain);
             this.Name = "dataFiller";
             this.Text = "Nowe pozwolenie";
@@ -704,5 +821,13 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.ComboBox cmbFrom;
         private System.Windows.Forms.ComboBox cmbTo;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.TextBox txtControllerPPN;
+        private System.Windows.Forms.TextBox txtAuthorizingPPN;
+        private System.Windows.Forms.TextBox txtAuthorizingPZ;
+        private System.Windows.Forms.TextBox txtAuthorizingPNW;
     }
 }

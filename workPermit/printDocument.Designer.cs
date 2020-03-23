@@ -30,6 +30,12 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmP1));
             this.pnlP1 = new System.Windows.Forms.Panel();
+            this.txtHolderName2 = new System.Windows.Forms.TextBox();
+            this.txtDate2 = new System.Windows.Forms.TextBox();
+            this.txtApplicant1 = new System.Windows.Forms.TextBox();
+            this.txtDate1 = new System.Windows.Forms.TextBox();
+            this.txtUser8 = new System.Windows.Forms.TextBox();
+            this.txtUser7 = new System.Windows.Forms.TextBox();
             this.txtWorkDescription = new System.Windows.Forms.TextBox();
             this.txtUser6 = new System.Windows.Forms.TextBox();
             this.txtUser5 = new System.Windows.Forms.TextBox();
@@ -54,8 +60,13 @@
             this.txtAuthorizing3 = new System.Windows.Forms.TextBox();
             this.txtApplicant3 = new System.Windows.Forms.TextBox();
             this.pBox2 = new System.Windows.Forms.PictureBox();
-            this.txtUser7 = new System.Windows.Forms.TextBox();
-            this.txtUser8 = new System.Windows.Forms.TextBox();
+            this.txtControllerPPN = new System.Windows.Forms.TextBox();
+            this.txtAuthorizingPPN = new System.Windows.Forms.TextBox();
+            this.txtAuthorizingPZ = new System.Windows.Forms.TextBox();
+            this.txtAuthorizingPZ1 = new System.Windows.Forms.TextBox();
+            this.txtAuthorizingPPN1 = new System.Windows.Forms.TextBox();
+            this.txtAuthorizingPNW1 = new System.Windows.Forms.TextBox();
+            this.txtAuthorizing4 = new System.Windows.Forms.TextBox();
             this.pnlP1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pBox)).BeginInit();
             this.pnlP2.SuspendLayout();
@@ -66,6 +77,17 @@
             // 
             this.pnlP1.AutoScroll = true;
             this.pnlP1.AutoSize = true;
+            this.pnlP1.Controls.Add(this.txtAuthorizing4);
+            this.pnlP1.Controls.Add(this.txtAuthorizingPNW1);
+            this.pnlP1.Controls.Add(this.txtAuthorizingPPN1);
+            this.pnlP1.Controls.Add(this.txtAuthorizingPZ1);
+            this.pnlP1.Controls.Add(this.txtAuthorizingPZ);
+            this.pnlP1.Controls.Add(this.txtAuthorizingPPN);
+            this.pnlP1.Controls.Add(this.txtControllerPPN);
+            this.pnlP1.Controls.Add(this.txtHolderName2);
+            this.pnlP1.Controls.Add(this.txtDate2);
+            this.pnlP1.Controls.Add(this.txtApplicant1);
+            this.pnlP1.Controls.Add(this.txtDate1);
             this.pnlP1.Controls.Add(this.txtUser8);
             this.pnlP1.Controls.Add(this.txtUser7);
             this.pnlP1.Controls.Add(this.txtWorkDescription);
@@ -91,6 +113,66 @@
             this.pnlP1.Name = "pnlP1";
             this.pnlP1.Size = new System.Drawing.Size(1041, 1459);
             this.pnlP1.TabIndex = 0;
+            // 
+            // txtHolderName2
+            // 
+            this.txtHolderName2.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtHolderName2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.txtHolderName2.Location = new System.Drawing.Point(661, 1230);
+            this.txtHolderName2.Name = "txtHolderName2";
+            this.txtHolderName2.Size = new System.Drawing.Size(117, 14);
+            this.txtHolderName2.TabIndex = 24;
+            this.txtHolderName2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // txtDate2
+            // 
+            this.txtDate2.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtDate2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.txtDate2.Location = new System.Drawing.Point(825, 1198);
+            this.txtDate2.Name = "txtDate2";
+            this.txtDate2.Size = new System.Drawing.Size(100, 14);
+            this.txtDate2.TabIndex = 23;
+            this.txtDate2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // txtApplicant1
+            // 
+            this.txtApplicant1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtApplicant1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.txtApplicant1.Location = new System.Drawing.Point(663, 1198);
+            this.txtApplicant1.Name = "txtApplicant1";
+            this.txtApplicant1.Size = new System.Drawing.Size(116, 14);
+            this.txtApplicant1.TabIndex = 22;
+            this.txtApplicant1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // txtDate1
+            // 
+            this.txtDate1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtDate1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.txtDate1.Location = new System.Drawing.Point(727, 408);
+            this.txtDate1.Name = "txtDate1";
+            this.txtDate1.Size = new System.Drawing.Size(100, 14);
+            this.txtDate1.TabIndex = 21;
+            this.txtDate1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // txtUser8
+            // 
+            this.txtUser8.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtUser8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.txtUser8.Location = new System.Drawing.Point(807, 201);
+            this.txtUser8.Name = "txtUser8";
+            this.txtUser8.Size = new System.Drawing.Size(160, 14);
+            this.txtUser8.TabIndex = 20;
+            this.txtUser8.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // txtUser7
+            // 
+            this.txtUser7.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtUser7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.txtUser7.Location = new System.Drawing.Point(655, 201);
+            this.txtUser7.Name = "txtUser7";
+            this.txtUser7.Size = new System.Drawing.Size(134, 14);
+            this.txtUser7.TabIndex = 19;
+            this.txtUser7.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // txtWorkDescription
             // 
@@ -335,25 +417,75 @@
             this.pBox2.TabStop = false;
             this.pBox2.Click += new System.EventHandler(this.pBox2_Click);
             // 
-            // txtUser7
+            // txtControllerPPN
             // 
-            this.txtUser7.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtUser7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.txtUser7.Location = new System.Drawing.Point(655, 201);
-            this.txtUser7.Name = "txtUser7";
-            this.txtUser7.Size = new System.Drawing.Size(134, 14);
-            this.txtUser7.TabIndex = 19;
-            this.txtUser7.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtControllerPPN.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtControllerPPN.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.txtControllerPPN.Location = new System.Drawing.Point(727, 441);
+            this.txtControllerPPN.Name = "txtControllerPPN";
+            this.txtControllerPPN.Size = new System.Drawing.Size(116, 14);
+            this.txtControllerPPN.TabIndex = 25;
+            this.txtControllerPPN.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // txtUser8
+            // txtAuthorizingPPN
             // 
-            this.txtUser8.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtUser8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.txtUser8.Location = new System.Drawing.Point(807, 201);
-            this.txtUser8.Name = "txtUser8";
-            this.txtUser8.Size = new System.Drawing.Size(160, 14);
-            this.txtUser8.TabIndex = 20;
-            this.txtUser8.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtAuthorizingPPN.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtAuthorizingPPN.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.txtAuthorizingPPN.Location = new System.Drawing.Point(727, 490);
+            this.txtAuthorizingPPN.Name = "txtAuthorizingPPN";
+            this.txtAuthorizingPPN.Size = new System.Drawing.Size(116, 14);
+            this.txtAuthorizingPPN.TabIndex = 26;
+            this.txtAuthorizingPPN.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // txtAuthorizingPZ
+            // 
+            this.txtAuthorizingPZ.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtAuthorizingPZ.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.txtAuthorizingPZ.Location = new System.Drawing.Point(758, 1028);
+            this.txtAuthorizingPZ.Name = "txtAuthorizingPZ";
+            this.txtAuthorizingPZ.Size = new System.Drawing.Size(116, 14);
+            this.txtAuthorizingPZ.TabIndex = 27;
+            this.txtAuthorizingPZ.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // txtAuthorizingPZ1
+            // 
+            this.txtAuthorizingPZ1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtAuthorizingPZ1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.txtAuthorizingPZ1.Location = new System.Drawing.Point(661, 1246);
+            this.txtAuthorizingPZ1.Name = "txtAuthorizingPZ1";
+            this.txtAuthorizingPZ1.Size = new System.Drawing.Size(116, 14);
+            this.txtAuthorizingPZ1.TabIndex = 28;
+            this.txtAuthorizingPZ1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // txtAuthorizingPPN1
+            // 
+            this.txtAuthorizingPPN1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtAuthorizingPPN1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.txtAuthorizingPPN1.Location = new System.Drawing.Point(661, 1262);
+            this.txtAuthorizingPPN1.Name = "txtAuthorizingPPN1";
+            this.txtAuthorizingPPN1.Size = new System.Drawing.Size(116, 14);
+            this.txtAuthorizingPPN1.TabIndex = 29;
+            this.txtAuthorizingPPN1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // txtAuthorizingPNW1
+            // 
+            this.txtAuthorizingPNW1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtAuthorizingPNW1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.txtAuthorizingPNW1.Location = new System.Drawing.Point(663, 1277);
+            this.txtAuthorizingPNW1.Name = "txtAuthorizingPNW1";
+            this.txtAuthorizingPNW1.Size = new System.Drawing.Size(116, 14);
+            this.txtAuthorizingPNW1.TabIndex = 30;
+            this.txtAuthorizingPNW1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // txtAuthorizing4
+            // 
+            this.txtAuthorizing4.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtAuthorizing4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.txtAuthorizing4.Location = new System.Drawing.Point(661, 1293);
+            this.txtAuthorizing4.Name = "txtAuthorizing4";
+            this.txtAuthorizing4.Size = new System.Drawing.Size(116, 14);
+            this.txtAuthorizing4.TabIndex = 31;
+            this.txtAuthorizing4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // frmP1
             // 
@@ -406,6 +538,17 @@
         private System.Windows.Forms.TextBox txtApplicant3;
         private System.Windows.Forms.TextBox txtUser8;
         private System.Windows.Forms.TextBox txtUser7;
+        private System.Windows.Forms.TextBox txtDate1;
+        private System.Windows.Forms.TextBox txtHolderName2;
+        private System.Windows.Forms.TextBox txtDate2;
+        private System.Windows.Forms.TextBox txtApplicant1;
+        private System.Windows.Forms.TextBox txtAuthorizing4;
+        private System.Windows.Forms.TextBox txtAuthorizingPNW1;
+        private System.Windows.Forms.TextBox txtAuthorizingPPN1;
+        private System.Windows.Forms.TextBox txtAuthorizingPZ1;
+        private System.Windows.Forms.TextBox txtAuthorizingPZ;
+        private System.Windows.Forms.TextBox txtAuthorizingPPN;
+        private System.Windows.Forms.TextBox txtControllerPPN;
     }
 }
 

@@ -25,6 +25,10 @@ namespace workPermit
         public string Holder { get; set; }
         public List<string> Users { get; set; }
         public string Authorizing { get; set; }
+        public string AuthorizingPPN { get; set; }
+        public string AuthorizingPZ { get; set; }
+        public string AuthorizingPNW { get; set; }
+        public string ControllerPPN { get; set; }
         public DateTime DateAdded { get; set; }
         public int Type { get; set; }   //1-new, 2-existent
         public bool isDirty { get
@@ -38,7 +42,11 @@ namespace workPermit
                         || !Comparison.AreEqual(this.HourTo, initialState.HourTo)
                         || !Comparison.AreEqual(this.Applicant, initialState.Applicant)
                         || !Comparison.AreEqual(this.Holder, initialState.Holder)
-                        || !Comparison.AreEqual(this.Authorizing, initialState.Authorizing))
+                        || !Comparison.AreEqual(this.Authorizing, initialState.Authorizing)
+                        || !Comparison.AreEqual(this.AuthorizingPPN, initialState.AuthorizingPPN)
+                        || !Comparison.AreEqual(this.AuthorizingPZ, initialState.AuthorizingPZ)
+                        || !Comparison.AreEqual(this.AuthorizingPNW, initialState.AuthorizingPNW)
+                        || !Comparison.AreEqual(this.ControllerPPN, initialState.ControllerPPN))
                     {
                         boo = true;
                     }
@@ -112,6 +120,10 @@ namespace workPermit
                             Applicant = reader["applicant"].ToString();
                             Holder = reader["holder"].ToString();
                             Authorizing = reader["authorizing"].ToString();
+                            AuthorizingPPN = reader["authorizingPPN"].ToString();
+                            AuthorizingPZ = reader["authorizingPZ"].ToString();
+                            AuthorizingPNW = reader["authorizingPNW"].ToString();
+                            ControllerPPN = reader["controllerPPN"].ToString();
                             DateAdded = reader.GetDateTime(reader.GetOrdinal("dateAdded"));
                             string users = reader["users"].ToString();
                             Users = users.Split(',').ToList();
@@ -142,6 +154,10 @@ namespace workPermit
             newWp.CompanyPhone = this.CompanyPhone;
             newWp.Applicant = this.Applicant;
             newWp.Authorizing = this.Authorizing;
+            newWp.AuthorizingPPN = this.AuthorizingPPN;
+            newWp.AuthorizingPZ = this.AuthorizingPZ;
+            newWp.AuthorizingPNW = this.AuthorizingPNW;
+            newWp.ControllerPPN = this.ControllerPPN;
             newWp.Holder = this.Holder;
             newWp.Users = this.Users;
             return newWp;
@@ -152,11 +168,11 @@ namespace workPermit
             string sql = "";
             if (this.Type == 1)
             {
-                sql = @"INSERT INTO tbWorkPermits (number, date, hourFrom, hourTo, description, department, place, company, companyPhone, applicant, holder, users, authorizing, dateAdded) VALUES (
-                                                      @number, @date, @hourFrom, @hourTo, @description, @department, @place, @company, @companyPhone, @applicant, @holder, @users, @authorizing, @dateAdded)";
+                sql = @"INSERT INTO tbWorkPermits (number, date, hourFrom, hourTo, description, department, place, company, companyPhone, applicant, holder, users, authorizing, authorizingPPN, authorizingPZ, authorizingPNW, controllerPPN, dateAdded) VALUES (
+                                                      @number, @date, @hourFrom, @hourTo, @description, @department, @place, @company, @companyPhone, @applicant, @holder, @users, @authorizing, @authorizingPPN, @authorizingPZ, @authorizingPNW, @controllerPPN, @dateAdded)";
             }else if (this.Type == 2)
             {
-                sql = @"UPDATE tbWorkPermits SET number=@number, date=@date, hourFrom=@hourFrom, hourTo=@hourTo, description=@description, department=@department, place=@place, company=@company, companyPhone=@companyPhone, applicant=@applicant, holder=@holder, users=@users, authorizing=@authorizing
+                sql = @"UPDATE tbWorkPermits SET number=@number, date=@date, hourFrom=@hourFrom, hourTo=@hourTo, description=@description, department=@department, place=@place, company=@company, companyPhone=@companyPhone, applicant=@applicant, holder=@holder, users=@users, authorizing=@authorizing, authorizingPPN=@authorizingPPN, authorizingPZ=@authorizingPZ, authorizingPNW=@authorizingPNW, controllerPPN=@controllerPPN
                                                       WHERE workPermitId=@id";
             }
             
@@ -180,6 +196,10 @@ namespace workPermit
                         sqlComand.Parameters.AddWithValue("@holder", this.Holder);
                         sqlComand.Parameters.AddWithValue("@users", this.GetUsers());
                         sqlComand.Parameters.AddWithValue("@authorizing", this.Authorizing);
+                        sqlComand.Parameters.AddWithValue("@authorizingPPN", this.AuthorizingPPN);
+                        sqlComand.Parameters.AddWithValue("@authorizingPZ", this.AuthorizingPZ);
+                        sqlComand.Parameters.AddWithValue("@authorizingPNW", this.AuthorizingPNW);
+                        sqlComand.Parameters.AddWithValue("@controllerPPN", this.ControllerPPN);
                         if (this.Type == 1)
                         {
                             sqlComand.Parameters.AddWithValue("@dateAdded", DateTime.Now);
