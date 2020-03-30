@@ -58,10 +58,6 @@
             this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.cmbFrom = new System.Windows.Forms.ComboBox();
-            this.tplButtons = new System.Windows.Forms.TableLayoutPanel();
-            this.btnCancel = new System.Windows.Forms.Button();
-            this.btnPreview = new System.Windows.Forms.Button();
-            this.btnSave = new System.Windows.Forms.Button();
             this.label15 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
@@ -70,6 +66,10 @@
             this.txtAuthorizingPPN = new System.Windows.Forms.TextBox();
             this.txtAuthorizingPZ = new System.Windows.Forms.TextBox();
             this.txtAuthorizingPNW = new System.Windows.Forms.TextBox();
+            this.tplButtons = new System.Windows.Forms.TableLayoutPanel();
+            this.btnCancel = new System.Windows.Forms.Button();
+            this.btnPreview = new System.Windows.Forms.Button();
+            this.btnSave = new System.Windows.Forms.Button();
             this.tplMain.SuspendLayout();
             this.tpl.SuspendLayout();
             this.tplHours.SuspendLayout();
@@ -606,70 +606,6 @@
             this.cmbFrom.Sorted = true;
             this.cmbFrom.TabIndex = 15;
             // 
-            // tplButtons
-            // 
-            this.tplButtons.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tplButtons.ColumnCount = 4;
-            this.tplButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tplButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
-            this.tplButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
-            this.tplButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
-            this.tplButtons.Controls.Add(this.btnCancel, 1, 0);
-            this.tplButtons.Controls.Add(this.btnPreview, 2, 0);
-            this.tplButtons.Controls.Add(this.btnSave, 3, 0);
-            this.tplButtons.Location = new System.Drawing.Point(3, 643);
-            this.tplButtons.Name = "tplButtons";
-            this.tplButtons.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
-            this.tplButtons.RowCount = 1;
-            this.tplButtons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tplButtons.Size = new System.Drawing.Size(601, 54);
-            this.tplButtons.TabIndex = 2;
-            // 
-            // btnCancel
-            // 
-            this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCancel.BackColor = System.Drawing.Color.LightCoral;
-            this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.btnCancel.Location = new System.Drawing.Point(311, 9);
-            this.btnCancel.Margin = new System.Windows.Forms.Padding(10, 3, 10, 15);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(80, 30);
-            this.btnCancel.TabIndex = 0;
-            this.btnCancel.Text = "Anuluj";
-            this.btnCancel.UseVisualStyleBackColor = false;
-            // 
-            // btnPreview
-            // 
-            this.btnPreview.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnPreview.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.btnPreview.Location = new System.Drawing.Point(411, 9);
-            this.btnPreview.Margin = new System.Windows.Forms.Padding(10, 3, 10, 15);
-            this.btnPreview.Name = "btnPreview";
-            this.btnPreview.Size = new System.Drawing.Size(80, 30);
-            this.btnPreview.TabIndex = 1;
-            this.btnPreview.Text = "Podgląd";
-            this.btnPreview.UseVisualStyleBackColor = true;
-            this.btnPreview.Click += new System.EventHandler(this.Preview);
-            // 
-            // btnSave
-            // 
-            this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSave.BackColor = System.Drawing.Color.YellowGreen;
-            this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.btnSave.Location = new System.Drawing.Point(511, 9);
-            this.btnSave.Margin = new System.Windows.Forms.Padding(10, 3, 10, 15);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(80, 30);
-            this.btnSave.TabIndex = 2;
-            this.btnSave.Text = "Zapisz";
-            this.btnSave.UseVisualStyleBackColor = false;
-            this.btnSave.Click += new System.EventHandler(this.Save);
-            // 
             // label15
             // 
             this.label15.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
@@ -766,6 +702,70 @@
             this.txtAuthorizingPNW.Name = "txtAuthorizingPNW";
             this.txtAuthorizingPNW.Size = new System.Drawing.Size(395, 26);
             this.txtAuthorizingPNW.TabIndex = 32;
+            // 
+            // tplButtons
+            // 
+            this.tplButtons.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tplButtons.ColumnCount = 4;
+            this.tplButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tplButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.tplButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.tplButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.tplButtons.Controls.Add(this.btnCancel, 1, 0);
+            this.tplButtons.Controls.Add(this.btnPreview, 2, 0);
+            this.tplButtons.Controls.Add(this.btnSave, 3, 0);
+            this.tplButtons.Location = new System.Drawing.Point(3, 643);
+            this.tplButtons.Name = "tplButtons";
+            this.tplButtons.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
+            this.tplButtons.RowCount = 1;
+            this.tplButtons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tplButtons.Size = new System.Drawing.Size(601, 54);
+            this.tplButtons.TabIndex = 2;
+            // 
+            // btnCancel
+            // 
+            this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCancel.BackColor = System.Drawing.Color.LightCoral;
+            this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.btnCancel.Location = new System.Drawing.Point(311, 9);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(10, 3, 10, 15);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(80, 30);
+            this.btnCancel.TabIndex = 0;
+            this.btnCancel.Text = "Anuluj";
+            this.btnCancel.UseVisualStyleBackColor = false;
+            // 
+            // btnPreview
+            // 
+            this.btnPreview.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnPreview.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.btnPreview.Location = new System.Drawing.Point(411, 9);
+            this.btnPreview.Margin = new System.Windows.Forms.Padding(10, 3, 10, 15);
+            this.btnPreview.Name = "btnPreview";
+            this.btnPreview.Size = new System.Drawing.Size(80, 30);
+            this.btnPreview.TabIndex = 1;
+            this.btnPreview.Text = "Podgląd";
+            this.btnPreview.UseVisualStyleBackColor = true;
+            this.btnPreview.Click += new System.EventHandler(this.Preview);
+            // 
+            // btnSave
+            // 
+            this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSave.BackColor = System.Drawing.Color.YellowGreen;
+            this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.btnSave.Location = new System.Drawing.Point(511, 9);
+            this.btnSave.Margin = new System.Windows.Forms.Padding(10, 3, 10, 15);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(80, 30);
+            this.btnSave.TabIndex = 2;
+            this.btnSave.Text = "Zapisz";
+            this.btnSave.UseVisualStyleBackColor = false;
+            this.btnSave.Click += new System.EventHandler(this.Save);
             // 
             // dataFiller
             // 

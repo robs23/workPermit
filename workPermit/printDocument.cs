@@ -77,18 +77,18 @@ namespace workPermit
                 foreach (var u in thisPermit.Users)
                 {
                     i++;
-                    if (i % 8 == 0)
+                    if (i % 9 == 0)
                     {
                         insertComa = true;
                         i = 1;
                     }
                     if (insertComa)
                     {
-                        pnlP1.Controls["txtUser" + i.ToString()].Text += "," + u;
+                        pnlP1.Controls["txtUser" + i.ToString()].Text += "," + u.Trim();
                     }
                     else
                     {
-                        pnlP1.Controls["txtUser" + i.ToString()].Text += u;
+                        pnlP1.Controls["txtUser" + i.ToString()].Text += u.Trim();
                     }
                     
                 }

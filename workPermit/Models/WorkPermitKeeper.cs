@@ -200,31 +200,38 @@ namespace workPermit
             int highestYear=0;
             int highestNumber = 0;
             Download();
-            
-            foreach(var wp in WorkPermits)
-            //get the highest year and week
+            try
             {
-                var arr = wp.Number.Split('/');
-
-                if (Convert.ToInt32(arr[1]) >= highestYear)
+                foreach (var wp in WorkPermits)
+                //get the highest year and week
                 {
-                    highestYear = Convert.ToInt32(arr[1]);
-                    if (Convert.ToInt32(arr[0]) > highestNumber)
+
+                    var arr = wp.Number.Split('/');
+
+                    if (Convert.ToInt32(arr[1]) >= highestYear)
                     {
-                        highestNumber = Convert.ToInt32(arr[0]);
+                        highestYear = Convert.ToInt32(arr[1]);
+                        if (Convert.ToInt32(arr[0]) > highestNumber)
+                        {
+                            highestNumber = Convert.ToInt32(arr[0]);
+                        }
                     }
                 }
-            }
-            if (highestYear < DateTime.Now.Year)
-            {
-                highestNumber = 0;
-            }
+                if (highestYear < DateTime.Now.Year)
+                {
+                    highestNumber = 0;
+                }
 
-            str = (highestNumber+1).ToString() + "/" + DateTime.Now.Year.ToString() ;
-            if (highestNumber < 10)
+                str = (highestNumber + 1).ToString() + "/" + DateTime.Now.Year.ToString();
+                if (highestNumber < 10)
+                {
+                    str = "0" + str;
+                }
+            }catch(Exception ex)
             {
-                str = "0" + str;
+                MessageBox.Show($"Nie mogę wygenerować kolejnego numeru pozwolenia. Opis błędu: {ex.Message}", "Błąd numeru", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            
             return str;
         }
 
