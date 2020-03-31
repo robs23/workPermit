@@ -101,6 +101,8 @@
     <Compile Include="dataFiller.Designer.cs">
       <DependentUpon>dataFiller.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\WorkPermitCheck.cs" />
+    <Compile Include="Models\WorkPermitCheckKeeper.cs" />
     <Compile Include="printDocument.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -140,6 +142,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -159,6 +162,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\X_mark_16.png" />
+    <None Include="Resources\rubber_24.png" />
+    <None Include="Resources\rubber_16.png" />
     <Content Include="workPermitIcon.ico" />
     <Content Include="wpIcon.ico" />
   </ItemGroup>

@@ -31,6 +31,7 @@ namespace workPermit
             tipper.SetToolTip(btnNext, "Wyświetl następną stronę");
             tipper.SetToolTip(btnPrev, "Wyświetl poprzednią stronę");
             tipper.SetToolTip(btnPrint, "Drukuj dokument");
+            tipper.SetToolTip(btnDeleteChecks, "Usuń ptaszki");
         }
 
         private void prevPage(object sender, EventArgs e)
@@ -39,6 +40,7 @@ namespace workPermit
             {
                 currentPage -= 1;
                 lblPage.Text = (currentPage).ToString();
+                _parentForm.RecreateChecks(currentPage);
             }
         }
 
@@ -48,6 +50,7 @@ namespace workPermit
             {
                 currentPage += 1;
                 lblPage.Text = (currentPage).ToString();
+                _parentForm.RecreateChecks(currentPage);
             }
         }
 
@@ -60,6 +63,11 @@ namespace workPermit
         private void printDoc(object sender, EventArgs e)
         {
             _parentForm.printMe();
+        }
+
+        private void btnDeleteChecks_Click(object sender, EventArgs e)
+        {
+            _parentForm.RemoveAllChecks();
         }
     }
 }

@@ -32,6 +32,7 @@
             this.btnPrev = new System.Windows.Forms.Button();
             this.btnNext = new System.Windows.Forms.Button();
             this.btnPrint = new System.Windows.Forms.Button();
+            this.btnDeleteChecks = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblPage
@@ -78,12 +79,23 @@
             this.btnPrint.UseVisualStyleBackColor = true;
             this.btnPrint.Click += new System.EventHandler(this.printDoc);
             // 
+            // btnDeleteChecks
+            // 
+            this.btnDeleteChecks.Image = global::workPermit.Properties.Resources.rubber_16;
+            this.btnDeleteChecks.Location = new System.Drawing.Point(98, 9);
+            this.btnDeleteChecks.Name = "btnDeleteChecks";
+            this.btnDeleteChecks.Size = new System.Drawing.Size(24, 23);
+            this.btnDeleteChecks.TabIndex = 4;
+            this.btnDeleteChecks.UseVisualStyleBackColor = true;
+            this.btnDeleteChecks.Click += new System.EventHandler(this.btnDeleteChecks_Click);
+            // 
             // printController
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(223, 36);
             this.ControlBox = false;
+            this.Controls.Add(this.btnDeleteChecks);
             this.Controls.Add(this.btnPrint);
             this.Controls.Add(this.btnNext);
             this.Controls.Add(this.btnPrev);
@@ -106,5 +118,6 @@
         private System.Windows.Forms.Button btnPrev;
         private System.Windows.Forms.Button btnNext;
         private System.Windows.Forms.Button btnPrint;
+        private System.Windows.Forms.Button btnDeleteChecks;
     }
 }

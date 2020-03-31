@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.ComponentModel;
 using System.Data.SqlClient;
 using System.Windows.Forms;
+using workPermit.Models;
 
 namespace workPermit
 {
@@ -30,6 +31,8 @@ namespace workPermit
         public string AuthorizingPNW { get; set; }
         public string ControllerPPN { get; set; }
         public DateTime DateAdded { get; set; }
+
+        public WorkPermitCheckKeeper CheckKeeper { get; set; }
         public int Type { get; set; }   //1-new, 2-existent
         public bool isDirty { get
             {
@@ -68,12 +71,13 @@ namespace workPermit
                 this.Type = 2;
                 BringDetails();
             }
+            CheckKeeper = new WorkPermitCheckKeeper();
             initialState = this.Clone();
         }
 
         public WorkPermit()
         {
-
+            CheckKeeper = new WorkPermitCheckKeeper();
         }
 
         public string GetUsers()

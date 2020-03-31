@@ -439,6 +439,7 @@
             this.pBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.pBox.TabIndex = 0;
             this.pBox.TabStop = false;
+            this.pBox.Click += new System.EventHandler(this.pBox_Click);
             // 
             // pnlP2
             // 

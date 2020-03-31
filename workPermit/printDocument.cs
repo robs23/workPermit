@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Diagnostics;
 using System.Windows.Forms;
 using System.IO;
+using workPermit.Models;
 
 namespace workPermit
 {
@@ -117,6 +118,18 @@ namespace workPermit
                 panelOnTop(activePnl);
             }
          }
+
+        public void RemoveAllChecks()
+        {
+            if (thisPermit.CheckKeeper.Items.Any())
+            {
+                foreach(WorkPermitCheck c in thisPermit.CheckKeeper.Items)
+                {
+                    Controls.Remove(c.Picture);
+                }
+                thisPermit.CheckKeeper.Items.Clear();
+            }
+        }
             
 
         public void panelOnTop(int panelId)
@@ -127,6 +140,7 @@ namespace workPermit
                 {
                     ctrl.Visible = true;
                     this.Text = "Strona " + panelId.ToString();
+                    //RecreateChecks(panelId);
                 }
                 else
                 {
@@ -155,14 +169,93 @@ namespace workPermit
             e.Graphics.DrawImage(memoryImage, bounds.Left, bounds.Top, bounds.Width, factor * bounds.Width);
         }
 
+        public void RecreateChecks(int page)
+        {
+            //Recreates checks for specified page of work permit
+            if (thisPermit.CheckKeeper.Items.Any(i => i.Page == page))
+            {
+                foreach(WorkPermitCheck c in thisPermit.CheckKeeper.Items.Where(i => i.Page == page))
+                {
+                    PictureBox pb;
+                    pb = PaintCheck(c);
+                    
+                    c.Picture = pb;
+                }
+            }
+        }
+
         private void pBox2_Click(object sender, EventArgs e)
         {
-
+            PictureBox pb = PaintCheck();
+            WorkPermitCheck wpc = new WorkPermitCheck()
+            {
+                Page = pc.currentPage,
+                WorkPermitId = thisPermit.WorkPermitId,
+                XPoint = Cursor.Position.X-4,
+                YPoint = Cursor.Position.Y-4,
+                CreatedOn = DateTime.Now,
+                Name = pb.Name,
+                Picture = pb
+            };
+            thisPermit.CheckKeeper.Items.Add(wpc);
         }
 
         private void txtLocal_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private PictureBox PaintCheck(WorkPermitCheck check =null)
+        {
+            PictureBox pb = new PictureBox();
+            //int scrollX = this.AutoScrollPosition.X;
+            //int scrollY = this.AutoScrollPosition.Y;
+            if (check == null)
+            {
+                //it has just been checked with mouse
+                pb.Location = this.PointToClient(new Point(Cursor.Position.X - 4, Cursor.Position.Y - 4));
+            }
+            else
+            {
+                //it's been restored from memory
+                pb.Location = this.PointToClient(new Point(check.XPoint, check.YPoint));
+            }
+            
+            pb.Size = new Size(10, 10);
+            pb.Image = workPermit.Properties.Resources.X_mark_16;
+            pb.Name = $"Pb_X{pb.Location.X}_Y{pb.Location.Y}";
+            Controls.Add(pb);
+            pb.SizeMode = PictureBoxSizeMode.CenterImage;
+            pb.BringToFront();
+            pb.Click += pb_Click;
+            return pb;
+        }
+
+        private void pBox_Click(object sender, EventArgs e)
+        {
+            PictureBox pb = PaintCheck();
+            WorkPermitCheck wpc = new WorkPermitCheck()
+            {
+                Page = pc.currentPage,
+                WorkPermitId = thisPermit.WorkPermitId,
+                XPoint = Cursor.Position.X-4,
+                YPoint = Cursor.Position.Y-4,
+                CreatedOn = DateTime.Now,
+                Name = pb.Name,
+                Picture = pb
+            };
+            //MessageBox.Show($"Kursor: X={Cursor.Position.X}, Y={Cursor.Position.Y}, Pb: X={pb.Location.X}, Y={pb.Location.Y}");
+            thisPermit.CheckKeeper.Items.Add(wpc);
+        }
+
+        private void pb_Click(object sender, EventArgs e)
+        {
+            PictureBox pb = (PictureBox)sender;
+            if(thisPermit.CheckKeeper.Items.Any(i => i.Name == pb.Name))
+            {
+                thisPermit.CheckKeeper.Items.Remove(thisPermit.CheckKeeper.Items.Where(i => i.Name == pb.Name).FirstOrDefault());
+            }
+            Controls.Remove(pb);
         }
     }
 }
