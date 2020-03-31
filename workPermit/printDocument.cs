@@ -196,6 +196,7 @@ namespace workPermit
 
         private PictureBox PaintCheck(WorkPermitCheck check =null)
         {
+
             PictureBox pb = new PictureBox();
             int scrollX = this.AutoScrollPosition.X;
             int scrollY = this.AutoScrollPosition.Y;
@@ -219,6 +220,12 @@ namespace workPermit
             pb.BringToFront();
             pb.Click += pb_Click;
             return pb;
+        }
+
+        protected override Point ScrollToControl(Control activeControl)
+        {
+            Point pt = this.AutoScrollPosition;
+            return pt;
         }
 
         private void CreateCheck()
