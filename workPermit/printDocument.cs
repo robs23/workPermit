@@ -186,18 +186,7 @@ namespace workPermit
 
         private void pBox2_Click(object sender, EventArgs e)
         {
-            PictureBox pb = PaintCheck();
-            WorkPermitCheck wpc = new WorkPermitCheck()
-            {
-                Page = pc.currentPage,
-                WorkPermitId = thisPermit.WorkPermitId,
-                XPoint = Cursor.Position.X-4,
-                YPoint = Cursor.Position.Y-4,
-                CreatedOn = DateTime.Now,
-                Name = pb.Name,
-                Picture = pb
-            };
-            thisPermit.CheckKeeper.Items.Add(wpc);
+            CreateCheck();
         }
 
         private void txtLocal_TextChanged(object sender, EventArgs e)
@@ -208,22 +197,23 @@ namespace workPermit
         private PictureBox PaintCheck(WorkPermitCheck check =null)
         {
             PictureBox pb = new PictureBox();
-            //int scrollX = this.AutoScrollPosition.X;
-            //int scrollY = this.AutoScrollPosition.Y;
+            int scrollX = this.AutoScrollPosition.X;
+            int scrollY = this.AutoScrollPosition.Y;
             if (check == null)
             {
                 //it has just been checked with mouse
                 pb.Location = this.PointToClient(new Point(Cursor.Position.X - 4, Cursor.Position.Y - 4));
+                pb.Name = $"Pb_X{pb.Location.X}_Y{pb.Location.Y}";
             }
             else
             {
                 //it's been restored from memory
-                pb.Location = this.PointToClient(new Point(check.XPoint, check.YPoint));
+                pb.Location = this.PointToClient(new Point(check.XPoint+scrollX, check.YPoint+scrollY));
+                pb.Name = check.Name;
             }
-            
             pb.Size = new Size(10, 10);
             pb.Image = workPermit.Properties.Resources.X_mark_16;
-            pb.Name = $"Pb_X{pb.Location.X}_Y{pb.Location.Y}";
+            
             Controls.Add(pb);
             pb.SizeMode = PictureBoxSizeMode.CenterImage;
             pb.BringToFront();
@@ -231,21 +221,28 @@ namespace workPermit
             return pb;
         }
 
-        private void pBox_Click(object sender, EventArgs e)
+        private void CreateCheck()
         {
+            int scrollX = this.AutoScrollPosition.X;
+            int scrollY = this.AutoScrollPosition.Y;
             PictureBox pb = PaintCheck();
             WorkPermitCheck wpc = new WorkPermitCheck()
             {
                 Page = pc.currentPage,
                 WorkPermitId = thisPermit.WorkPermitId,
-                XPoint = Cursor.Position.X-4,
-                YPoint = Cursor.Position.Y-4,
+                XPoint = Cursor.Position.X - 4-scrollX,
+                YPoint = Cursor.Position.Y - 4-scrollY,
                 CreatedOn = DateTime.Now,
                 Name = pb.Name,
                 Picture = pb
             };
             //MessageBox.Show($"Kursor: X={Cursor.Position.X}, Y={Cursor.Position.Y}, Pb: X={pb.Location.X}, Y={pb.Location.Y}");
             thisPermit.CheckKeeper.Items.Add(wpc);
+        }
+
+        private void pBox_Click(object sender, EventArgs e)
+        {
+            CreateCheck();
         }
 
         private void pb_Click(object sender, EventArgs e)
