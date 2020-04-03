@@ -451,7 +451,6 @@
             this.pnlP2.Name = "pnlP2";
             this.pnlP2.Size = new System.Drawing.Size(1041, 1455);
             this.pnlP2.TabIndex = 1;
-            this.pnlP2.Visible = false;
             // 
             // txtHolder3
             // 
@@ -493,7 +492,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(755, 518);
+            this.ClientSize = new System.Drawing.Size(772, 535);
             this.Controls.Add(this.pnlP1);
             this.Controls.Add(this.pnlP2);
             this.Name = "frmP1";

@@ -351,6 +351,7 @@
             // 
             // txtCompany
             // 
+            this.txtCompany.AcceptsTab = true;
             this.txtCompany.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtCompany.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.txtCompany.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
@@ -404,7 +405,7 @@
             this.txtUsers.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.txtUsers.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.txtUsers.Location = new System.Drawing.Point(203, 379);
-            this.txtUsers.MaxLength = 255;
+            this.txtUsers.MaxLength = 500;
             this.txtUsers.Name = "txtUsers";
             this.txtUsers.Size = new System.Drawing.Size(395, 26);
             this.txtUsers.TabIndex = 22;
@@ -662,7 +663,7 @@
             this.txtControllerPPN.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.txtControllerPPN.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.txtControllerPPN.Location = new System.Drawing.Point(203, 449);
-            this.txtControllerPPN.MaxLength = 50;
+            this.txtControllerPPN.MaxLength = 255;
             this.txtControllerPPN.Name = "txtControllerPPN";
             this.txtControllerPPN.Size = new System.Drawing.Size(395, 26);
             this.txtControllerPPN.TabIndex = 29;
@@ -674,7 +675,7 @@
             this.txtAuthorizingPPN.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.txtAuthorizingPPN.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.txtAuthorizingPPN.Location = new System.Drawing.Point(203, 484);
-            this.txtAuthorizingPPN.MaxLength = 50;
+            this.txtAuthorizingPPN.MaxLength = 255;
             this.txtAuthorizingPPN.Name = "txtAuthorizingPPN";
             this.txtAuthorizingPPN.Size = new System.Drawing.Size(395, 26);
             this.txtAuthorizingPPN.TabIndex = 30;
@@ -686,7 +687,7 @@
             this.txtAuthorizingPZ.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.txtAuthorizingPZ.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.txtAuthorizingPZ.Location = new System.Drawing.Point(203, 519);
-            this.txtAuthorizingPZ.MaxLength = 50;
+            this.txtAuthorizingPZ.MaxLength = 255;
             this.txtAuthorizingPZ.Name = "txtAuthorizingPZ";
             this.txtAuthorizingPZ.Size = new System.Drawing.Size(395, 26);
             this.txtAuthorizingPZ.TabIndex = 31;
@@ -698,7 +699,7 @@
             this.txtAuthorizingPNW.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.txtAuthorizingPNW.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.txtAuthorizingPNW.Location = new System.Drawing.Point(203, 554);
-            this.txtAuthorizingPNW.MaxLength = 50;
+            this.txtAuthorizingPNW.MaxLength = 255;
             this.txtAuthorizingPNW.Name = "txtAuthorizingPNW";
             this.txtAuthorizingPNW.Size = new System.Drawing.Size(395, 26);
             this.txtAuthorizingPNW.TabIndex = 32;
@@ -737,6 +738,7 @@
             this.btnCancel.TabIndex = 0;
             this.btnCancel.Text = "Anuluj";
             this.btnCancel.UseVisualStyleBackColor = false;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // btnPreview
             // 

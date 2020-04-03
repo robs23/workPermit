@@ -12,6 +12,7 @@ namespace workPermit
         public Control ThisControl = new Control();
         public List<string> Values = new List<string>();
         public List<string> Filtered = new List<string>();
+        public Form ParentForm { get; set; }
         private bool IsActive;
         public AutoCompleteType Type;
         public bool isActive {
@@ -38,6 +39,7 @@ namespace workPermit
         public AutoComplete(AutoCompleteKeeper Keeper, AutoCompleteType type = AutoCompleteType.replace)
         {
             this.Keeper = Keeper;
+            ParentForm = ThisControl.FindForm();
             Type = type;
             AddEvents();
         }
@@ -46,6 +48,7 @@ namespace workPermit
         {
             ThisControl = ctrl;
             this.Keeper = Keeper;
+            ParentForm = ThisControl.FindForm();
             Type = type;
             AddEvents();
         }
@@ -54,6 +57,7 @@ namespace workPermit
         {
             ThisControl = ctrl;
             this.Keeper = Keeper;
+            ParentForm = ThisControl.FindForm();
             Values = values;
             Type = type;
             AddEvents();
@@ -133,7 +137,7 @@ namespace workPermit
             ThisControl.KeyUp += (sender, e) =>
             {
                 Update(ThisControl.Text);
-                if (e.KeyCode == Keys.Enter)
+                if (e.KeyCode == Keys.Enter || (e.KeyCode == Keys.Tab && ThisControl.Text.Length>0))
                 {
                     if(this.Type == AutoCompleteType.replace)
                     {
@@ -203,7 +207,17 @@ namespace workPermit
                     Show();
                 }
             };
+
+            ParentForm.PreviewKeyDown += (sender, e) =>
+            {
+                if (e.KeyCode == Keys.Tab)
+                {
+                    e.IsInputKey = true;
+                }
+            };
         }
+
+
     }
     public enum AutoCompleteType
     {

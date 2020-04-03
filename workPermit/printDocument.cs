@@ -59,6 +59,7 @@ namespace workPermit
             SetUsers();
             pc = new printController(this);
             pc.StartPosition = FormStartPosition.CenterParent;
+            RecreateChecks(1);
             pc.Show(this);
 
         }
@@ -209,7 +210,17 @@ namespace workPermit
             else
             {
                 //it's been restored from memory
-                pb.Location = this.PointToClient(new Point(check.XPoint+scrollX, check.YPoint+scrollY));
+                //pb.Location = this.PointToClient(new Point(check.XPoint+scrollX, check.YPoint+scrollY));
+                if (pc.currentPage == 1)
+                {
+                    pb.Left = pBox.Left + check.XPoint;
+                    pb.Top = pBox.Top + check.YPoint;
+                }
+                else
+                {
+                    pb.Left = pBox2.Left + check.XPoint;
+                    pb.Top = pBox2.Top + check.YPoint;
+                }
                 pb.Name = check.Name;
             }
             pb.Size = new Size(10, 10);
@@ -233,12 +244,29 @@ namespace workPermit
             int scrollX = this.AutoScrollPosition.X;
             int scrollY = this.AutoScrollPosition.Y;
             PictureBox pb = PaintCheck();
+            int calcX=0;
+            int calcY=0;
+
+            if (pc.currentPage == 1)
+            {
+                calcX = pb.Left - pBox.Left;
+                calcY = pb.Top - pBox.Top;
+            }
+            else
+            {
+                calcX = pb.Left - pBox2.Left;
+                calcY = pb.Top - pBox2.Top;
+            }
+            
+            
             WorkPermitCheck wpc = new WorkPermitCheck()
             {
                 Page = pc.currentPage,
                 WorkPermitId = thisPermit.WorkPermitId,
-                XPoint = Cursor.Position.X - 4-scrollX,
-                YPoint = Cursor.Position.Y - 4-scrollY,
+                //XPoint = Cursor.Position.X - 4-scrollX,
+                //YPoint = Cursor.Position.Y - 4-scrollY,
+                XPoint = calcX,
+                YPoint = calcY,
                 CreatedOn = DateTime.Now,
                 Name = pb.Name,
                 Picture = pb
