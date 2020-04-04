@@ -40,7 +40,6 @@ namespace workPermit
             {
                 currentPage -= 1;
                 lblPage.Text = (currentPage).ToString();
-                _parentForm.RecreateChecks(currentPage);
             }
         }
 
@@ -50,7 +49,6 @@ namespace workPermit
             {
                 currentPage += 1;
                 lblPage.Text = (currentPage).ToString();
-                _parentForm.RecreateChecks(currentPage);
             }
         }
 

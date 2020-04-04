@@ -126,7 +126,15 @@ namespace workPermit
             {
                 foreach(WorkPermitCheck c in thisPermit.CheckKeeper.Items)
                 {
-                    Controls.Remove(c.Picture);
+                    if (c.Page == 1)
+                    {
+                        pBox.Controls.Remove(pBox.Controls[c.Name]);
+                    }
+                    else
+                    {
+                        pBox2.Controls.Remove(pBox2.Controls[c.Name]);
+                    }
+                   
                 }
                 thisPermit.CheckKeeper.Items.Clear();
             }
@@ -178,7 +186,17 @@ namespace workPermit
                 foreach(WorkPermitCheck c in thisPermit.CheckKeeper.Items.Where(i => i.Page == page))
                 {
                     PictureBox pb;
-                    pb = PaintCheck(c);
+                    PictureBox parent;
+
+                    if (c.Page == 1)
+                    {
+                        parent = pBox;
+                    }
+                    else
+                    {
+                        parent = pBox2;
+                    }
+                    pb = PaintCheck(new Point(c.XPoint, c.YPoint), parent, c);
                     
                     c.Picture = pb;
                 }
@@ -187,7 +205,8 @@ namespace workPermit
 
         private void pBox2_Click(object sender, EventArgs e)
         {
-            CreateCheck();
+            Point p = ((MouseEventArgs)e).Location;
+            CreateCheck(p, pBox2);
         }
 
         private void txtLocal_TextChanged(object sender, EventArgs e)
@@ -195,38 +214,28 @@ namespace workPermit
 
         }
 
-        private PictureBox PaintCheck(WorkPermitCheck check =null)
+        private PictureBox PaintCheck(Point ClickPoint, PictureBox Parent, WorkPermitCheck check =null)
         {
 
             PictureBox pb = new PictureBox();
-            int scrollX = this.AutoScrollPosition.X;
-            int scrollY = this.AutoScrollPosition.Y;
+            
+
             if (check == null)
             {
                 //it has just been checked with mouse
-                pb.Location = this.PointToClient(new Point(Cursor.Position.X - 4, Cursor.Position.Y - 4));
+                pb.Location = new Point(ClickPoint.X-5, ClickPoint.Y-5);
                 pb.Name = $"Pb_X{pb.Location.X}_Y{pb.Location.Y}";
             }
             else
             {
-                //it's been restored from memory
-                //pb.Location = this.PointToClient(new Point(check.XPoint+scrollX, check.YPoint+scrollY));
-                if (pc.currentPage == 1)
-                {
-                    pb.Left = pBox.Left + check.XPoint;
-                    pb.Top = pBox.Top + check.YPoint;
-                }
-                else
-                {
-                    pb.Left = pBox2.Left + check.XPoint;
-                    pb.Top = pBox2.Top + check.YPoint;
-                }
+                //it's been restored from memory 
+                pb.Location = ClickPoint;
                 pb.Name = check.Name;
             }
             pb.Size = new Size(10, 10);
             pb.Image = workPermit.Properties.Resources.X_mark_16;
             
-            Controls.Add(pb);
+            Parent.Controls.Add(pb);
             pb.SizeMode = PictureBoxSizeMode.CenterImage;
             pb.BringToFront();
             pb.Click += pb_Click;
@@ -239,45 +248,28 @@ namespace workPermit
             return pt;
         }
 
-        private void CreateCheck()
+        private void CreateCheck(Point ClickPoint, PictureBox pic)
         {
-            int scrollX = this.AutoScrollPosition.X;
-            int scrollY = this.AutoScrollPosition.Y;
-            PictureBox pb = PaintCheck();
-            int calcX=0;
-            int calcY=0;
-
-            if (pc.currentPage == 1)
-            {
-                calcX = pb.Left - pBox.Left;
-                calcY = pb.Top - pBox.Top;
-            }
-            else
-            {
-                calcX = pb.Left - pBox2.Left;
-                calcY = pb.Top - pBox2.Top;
-            }
-            
+            PictureBox pb = PaintCheck(ClickPoint, pic);
+            pb.Parent = pic;
             
             WorkPermitCheck wpc = new WorkPermitCheck()
             {
                 Page = pc.currentPage,
                 WorkPermitId = thisPermit.WorkPermitId,
-                //XPoint = Cursor.Position.X - 4-scrollX,
-                //YPoint = Cursor.Position.Y - 4-scrollY,
-                XPoint = calcX,
-                YPoint = calcY,
+                XPoint = ClickPoint.X - (pb.Width / 2),
+                YPoint = ClickPoint.Y - (pb.Height / 2),
                 CreatedOn = DateTime.Now,
                 Name = pb.Name,
                 Picture = pb
             };
-            //MessageBox.Show($"Kursor: X={Cursor.Position.X}, Y={Cursor.Position.Y}, Pb: X={pb.Location.X}, Y={pb.Location.Y}");
             thisPermit.CheckKeeper.Items.Add(wpc);
         }
 
         private void pBox_Click(object sender, EventArgs e)
         {
-            CreateCheck();
+            Point p = ((MouseEventArgs)e).Location;
+            CreateCheck(p, pBox);
         }
 
         private void pb_Click(object sender, EventArgs e)
@@ -287,7 +279,15 @@ namespace workPermit
             {
                 thisPermit.CheckKeeper.Items.Remove(thisPermit.CheckKeeper.Items.Where(i => i.Name == pb.Name).FirstOrDefault());
             }
-            Controls.Remove(pb);
+            if (pc.currentPage == 1)
+            {
+                pBox.Controls.Remove(pBox.Controls[pb.Name]);
+            }
+            else
+            {
+                pBox2.Controls.Remove(pBox2.Controls[pb.Name]);
+            }
+            
         }
     }
 }
