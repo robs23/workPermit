@@ -65,13 +65,14 @@ namespace workPermit
             {
                 this.Date = DateTime.Now.Date;
                 this.Type = 1;
+                CheckKeeper = new WorkPermitCheckKeeper();
                 getNewNumber();
             }else
             {
                 this.Type = 2;
                 BringDetails();
+                BringChecks();
             }
-            CheckKeeper = new WorkPermitCheckKeeper();
             initialState = this.Clone();
         }
 
@@ -142,6 +143,20 @@ namespace workPermit
             }
         }
 
+        public void BringChecks()
+        {
+            try
+            {
+                CheckKeeper = new WorkPermitCheckKeeper();
+                CheckKeeper.Download(this.WorkPermitId);
+            }
+            catch (Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show(ex.Message);
+                //MessageBox.Show(String.Format("Nie udało się nawiązać połączenia z bazą danych", "Błąd połączenia z bazą danych"));
+            }
+        }
+
         public WorkPermit Clone()
         {
             WorkPermit newWp = new WorkPermit();
@@ -172,8 +187,9 @@ namespace workPermit
             string sql = "";
             if (this.Type == 1)
             {
-                sql = @"INSERT INTO tbWorkPermits (number, date, hourFrom, hourTo, description, department, place, company, companyPhone, applicant, holder, users, authorizing, authorizingPPN, authorizingPZ, authorizingPNW, controllerPPN, dateAdded) VALUES (
-                                                      @number, @date, @hourFrom, @hourTo, @description, @department, @place, @company, @companyPhone, @applicant, @holder, @users, @authorizing, @authorizingPPN, @authorizingPZ, @authorizingPNW, @controllerPPN, @dateAdded)";
+                sql = @"INSERT INTO tbWorkPermits (number, date, hourFrom, hourTo, description, department, place, company, companyPhone, applicant, holder, users, authorizing, authorizingPPN, authorizingPZ, authorizingPNW, controllerPPN, dateAdded) 
+                        output INSERTED.WorkPermitId 
+                        VALUES (@number, @date, @hourFrom, @hourTo, @description, @department, @place, @company, @companyPhone, @applicant, @holder, @users, @authorizing, @authorizingPPN, @authorizingPZ, @authorizingPNW, @controllerPPN, @dateAdded)";
             }else if (this.Type == 2)
             {
                 sql = @"UPDATE tbWorkPermits SET number=@number, date=@date, hourFrom=@hourFrom, hourTo=@hourTo, description=@description, department=@department, place=@place, company=@company, companyPhone=@companyPhone, applicant=@applicant, holder=@holder, users=@users, authorizing=@authorizing, authorizingPPN=@authorizingPPN, authorizingPZ=@authorizingPZ, authorizingPNW=@authorizingPNW, controllerPPN=@controllerPPN
@@ -207,16 +223,21 @@ namespace workPermit
                         if (this.Type == 1)
                         {
                             sqlComand.Parameters.AddWithValue("@dateAdded", DateTime.Now);
+                            conn.Open();
+                            this.WorkPermitId = (int)sqlComand.ExecuteScalar();
                         }
                         else
                         {
                             sqlComand.Parameters.AddWithValue("@id", this.WorkPermitId);
+                            conn.Open();
+                            sqlComand.ExecuteNonQuery();
                         }
-                        conn.Open();
-                        sqlComand.ExecuteNonQuery();
-                        MessageBox.Show("Zapis zakończony powodzeniem!");
+                        
+                        
                     }
                 }
+                SaveChecks();
+                MessageBox.Show("Zapis zakończony powodzeniem!");
             }
             catch(Exception ex)
             { 
@@ -225,6 +246,47 @@ namespace workPermit
             finally
             {
                 initialState = this.Clone();
+            }
+        }
+
+        public void SaveChecks()
+        {
+            string dSql = "DELETE FROM tbWorkPermitChecks WHERE WorkPermitId=@WorkPermitId";
+            string iSql = "";
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(Variables.npdConnectionString))
+                {
+                    SqlCommand sqlComand;
+                    using (sqlComand = new SqlCommand(dSql, conn))
+                    {
+                        sqlComand.Parameters.AddWithValue("@WorkPermitId", this.WorkPermitId);
+                        conn.Open();
+                        sqlComand.ExecuteNonQuery();
+                    }
+
+                    SqlCommand iSqlCommand;
+                    foreach(WorkPermitCheck c in CheckKeeper.Items)
+                    {
+                        iSql = "INSERT INTO tbWorkPermitChecks (WorkPermitId, Name, Page, XPoint, YPoint, CreatedOn)" +
+                            " VALUES (@WorkPermitId, @Name, @Page, @XPoint, @YPoint, @CreatedOn)";
+                        using(iSqlCommand = new SqlCommand(iSql, conn))
+                        {
+                            iSqlCommand.Parameters.AddWithValue("@WorkPermitId", this.WorkPermitId);
+                            iSqlCommand.Parameters.AddWithValue("@Name", c.Name);
+                            iSqlCommand.Parameters.AddWithValue("@Page", c.Page);
+                            iSqlCommand.Parameters.AddWithValue("@XPoint", c.XPoint);
+                            iSqlCommand.Parameters.AddWithValue("@YPoint", c.YPoint);
+                            iSqlCommand.Parameters.AddWithValue("@CreatedOn", DateTime.Now);
+                            iSqlCommand.ExecuteNonQuery();
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString());
             }
         }
 

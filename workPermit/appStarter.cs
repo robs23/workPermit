@@ -106,7 +106,9 @@ namespace workPermit
         private void bringWorkPermit(object sender, DataGridViewCellEventArgs e)
         {
             int wpId = Convert.ToInt32(dgWorkPermits.Rows[dgWorkPermits.CurrentCell.RowIndex].Cells[0].Value);
+            WorkPermit wp = Keeper.WorkPermits.Where(i => i.WorkPermitId == wpId).FirstOrDefault();
             dataFiller df = new dataFiller(Keeper,wpId);
+
             df.Show();
         }
 

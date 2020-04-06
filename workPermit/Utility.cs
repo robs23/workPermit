@@ -33,13 +33,29 @@ namespace workPermit
     {
         public static bool AreEqual(string a, string b)
         {
-            if (string.IsNullOrEmpty(a))
+            
+            if (string.IsNullOrWhiteSpace(a))
             {
-                return string.IsNullOrEmpty(b);
+                if (string.IsNullOrWhiteSpace(b))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             else
             {
-                return string.Equals(a, b);
+                if (string.IsNullOrWhiteSpace(b))
+                {
+                    return false;
+                }
+                else
+                {
+                    return string.Equals(a.Trim(), b.Trim());
+                }
+                
             }
         }
     }

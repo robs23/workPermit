@@ -23,11 +23,11 @@ namespace workPermit.Models
 
             if (WorkPermitId > 0)
             {
-                sql = $"SELECT * FROM tbWorkPermitChecks WHERE WorkPermitId={WorkPermitId} ORDER BY CreatedOn DESC;";
+                sql = $"SELECT * FROM tbWorkPermitChecks WHERE WorkPermitId={WorkPermitId}";
             }
             else
             {
-                sql = "SELECT * FROM tbWorkPermitChecks ORDER BY CreatedOn DESC;";
+                sql = "SELECT * FROM tbWorkPermitChecks ORDER BY CreatedOn DESC";
             }
             
 
@@ -43,15 +43,14 @@ namespace workPermit.Models
                     {
                         while (reader.Read())
                         {
-                            WorkPermitCheck wp = new WorkPermitCheck
-                            {
-                                WorkPermitCheckId = reader.GetInt32(reader.GetOrdinal("workPermitCheckId")),
-                                WorkPermitId = reader.GetInt32(reader.GetOrdinal("workPermitId")),
-                                Page = reader.GetInt32(reader.GetOrdinal("Page")),
-                                XPoint = reader.GetInt32(reader.GetOrdinal("XPoint")),
-                                YPoint = reader.GetInt32(reader.GetOrdinal("YPoint")),
-                                CreatedOn = reader.GetDateTime(reader.GetOrdinal("CreatedOn"))
-                            };
+                            WorkPermitCheck wp = new WorkPermitCheck();
+                            wp.WorkPermitCheckId = reader.GetInt32(reader.GetOrdinal("WorkPermitCheckId"));
+                            wp.WorkPermitId = reader.GetInt32(reader.GetOrdinal("WorkPermitId"));
+                            wp.Name = reader.GetString(reader.GetOrdinal("Name"));
+                            wp.Page = reader.GetInt32(reader.GetOrdinal("Page"));
+                            wp.XPoint = reader.GetInt32(reader.GetOrdinal("XPoint"));
+                            wp.YPoint = reader.GetInt32(reader.GetOrdinal("YPoint"));
+                            wp.CreatedOn = reader.GetDateTime(reader.GetOrdinal("CreatedOn"));
                             Items.Add(wp);
                         }
                     }
