@@ -33,6 +33,7 @@ namespace workPermit
         public DateTime DateAdded { get; set; }
 
         public WorkPermitCheckKeeper CheckKeeper { get; set; }
+        public WorkPermitCheckKeeper InitialChecks { get; set; }
         public int Type { get; set; }   //1-new, 2-existent
         public bool isDirty { get
             {
@@ -52,6 +53,17 @@ namespace workPermit
                         || !Comparison.AreEqual(this.ControllerPPN, initialState.ControllerPPN))
                     {
                         boo = true;
+                    }
+                }
+                if (boo == false)
+                {
+                    //if not yet dirty, check checks
+                    if (InitialChecks != null)
+                    {
+                        if (!this.CheckKeeper.IsEqual(InitialChecks))
+                        {
+                            boo = true;
+                        }
                     }
                 }
                 return boo;
@@ -74,6 +86,7 @@ namespace workPermit
                 BringChecks();
             }
             initialState = this.Clone();
+            InitialChecks = this.CheckKeeper;
         }
 
         public WorkPermit()
@@ -179,6 +192,8 @@ namespace workPermit
             newWp.ControllerPPN = this.ControllerPPN;
             newWp.Holder = this.Holder;
             newWp.Users = this.Users;
+            newWp.CheckKeeper = new WorkPermitCheckKeeper();
+            newWp.CheckKeeper = this.CheckKeeper.CloneJson<WorkPermitCheckKeeper>();
             return newWp;
         }
 
@@ -246,6 +261,7 @@ namespace workPermit
             finally
             {
                 initialState = this.Clone();
+                InitialChecks = this.CheckKeeper;
             }
         }
 

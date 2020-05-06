@@ -357,6 +357,7 @@
             this.txtPerminNumber.TabIndex = 8;
             this.txtPerminNumber.TabStop = false;
             this.txtPerminNumber.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtPerminNumber.Visible = false;
             // 
             // txtApplicantPhone
             // 

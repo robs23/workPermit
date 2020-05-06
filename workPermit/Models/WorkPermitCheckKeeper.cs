@@ -98,5 +98,48 @@ namespace workPermit.Models
                 }
             }
         }
+
+        public bool IsEqual(WorkPermitCheckKeeper other)
+        {
+            bool _Result = true; //assume they are equal
+
+            if (other != null)
+            {
+                if(this.Items.Count != other.Items.Count)
+                {
+                    _Result = false;
+                }
+                else
+                {
+                    //we'll have to check it manually
+                    foreach(WorkPermitCheck i in this.Items)
+                    {
+                        if(!other.Items.Any(c=>c.XPoint==i.XPoint && c.YPoint == i.YPoint))
+                        {
+                            _Result = false;
+                            break;
+                        }
+                    }
+                    if (_Result)
+                    {
+                        //if still true then go the other way around
+                        foreach(WorkPermitCheck c in other.Items)
+                        {
+                            if(!this.Items.Any(i=>i.XPoint==c.XPoint && i.YPoint == c.YPoint))
+                            {
+                                _Result = false;
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+            else
+            {
+                _Result = false;
+            }
+
+            return _Result;
+        }
     }
 }

@@ -5,6 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Configuration;
 using System.Data.SqlClient;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.IO;
+using Newtonsoft.Json;
 
 namespace workPermit
 {
@@ -27,7 +31,9 @@ namespace workPermit
 
         //    return returnValue;
         //}
+        
     }
+
 
     static class Comparison
     {
