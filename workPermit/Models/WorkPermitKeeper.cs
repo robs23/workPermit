@@ -199,6 +199,8 @@ namespace workPermit
             string str = "";
             int highestYear=0;
             int highestNumber = 0;
+            int currentYear = 0;
+            int currentNumber = 0;
             Download();
             try
             {
@@ -208,14 +210,27 @@ namespace workPermit
 
                     var arr = wp.Number.Split('/');
 
-                    if (Convert.ToInt32(arr[1]) >= highestYear)
+                    if (arr.Length > 1)
                     {
-                        highestYear = Convert.ToInt32(arr[1]);
-                        if (Convert.ToInt32(arr[0]) > highestNumber)
+                        //if not, then the format is definitely wrong
+                        bool parsable = int.TryParse(arr[1], out currentYear);
+                        if (parsable)
                         {
-                            highestNumber = Convert.ToInt32(arr[0]);
+                            parsable = int.TryParse(arr[0], out currentNumber);
+                            if (parsable)
+                            {
+                                if (currentYear >= highestYear)
+                                {
+                                    highestYear = currentYear;
+                                    if (currentNumber > highestNumber)
+                                    {
+                                        highestNumber = currentNumber;
+                                    }
+                                }
+                            }
+
                         }
-                    }
+                    }  
                 }
                 if (highestYear < DateTime.Now.Year)
                 {

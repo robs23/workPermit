@@ -44,6 +44,10 @@ namespace workPermit
                         || this.Date!= initialState.Date
                         || !Comparison.AreEqual(this.HourFrom, initialState.HourFrom)
                         || !Comparison.AreEqual(this.HourTo, initialState.HourTo)
+                        || !Comparison.AreEqual(this.CompanyName, initialState.CompanyName)
+                        || !Comparison.AreEqual(this.CompanyPhone, initialState.CompanyPhone)
+                        || !Comparison.AreEqual(this.Department, initialState.Department)
+                        || !Comparison.AreEqual(this.Place, initialState.Place)
                         || !Comparison.AreEqual(this.Applicant, initialState.Applicant)
                         || !Comparison.AreEqual(this.Holder, initialState.Holder)
                         || !Comparison.AreEqual(this.Authorizing, initialState.Authorizing)
@@ -86,7 +90,7 @@ namespace workPermit
                 BringChecks();
             }
             initialState = this.Clone();
-            InitialChecks = this.CheckKeeper;
+            InitialChecks = this.CheckKeeper.CloneJson<WorkPermitCheckKeeper>();
         }
 
         public WorkPermit()
@@ -197,72 +201,90 @@ namespace workPermit
             return newWp;
         }
 
+        public bool Validate()
+        {
+            bool _Result = true;
+
+            if (string.IsNullOrEmpty(this.Number))
+            {
+                _Result = false;
+                MessageBox.Show("Numer nie może być pusty..");
+            }
+
+            return _Result;
+        }
+
         public void Save()
         {
-            string sql = "";
-            if (this.Type == 1)
+            if (Validate())
             {
-                sql = @"INSERT INTO tbWorkPermits (number, date, hourFrom, hourTo, description, department, place, company, companyPhone, applicant, holder, users, authorizing, authorizingPPN, authorizingPZ, authorizingPNW, controllerPPN, dateAdded) 
+                string sql = "";
+                if (this.Type == 1)
+                {
+                    sql = @"INSERT INTO tbWorkPermits (number, date, hourFrom, hourTo, description, department, place, company, companyPhone, applicant, holder, users, authorizing, authorizingPPN, authorizingPZ, authorizingPNW, controllerPPN, dateAdded) 
                         output INSERTED.WorkPermitId 
                         VALUES (@number, @date, @hourFrom, @hourTo, @description, @department, @place, @company, @companyPhone, @applicant, @holder, @users, @authorizing, @authorizingPPN, @authorizingPZ, @authorizingPNW, @controllerPPN, @dateAdded)";
-            }else if (this.Type == 2)
-            {
-                sql = @"UPDATE tbWorkPermits SET number=@number, date=@date, hourFrom=@hourFrom, hourTo=@hourTo, description=@description, department=@department, place=@place, company=@company, companyPhone=@companyPhone, applicant=@applicant, holder=@holder, users=@users, authorizing=@authorizing, authorizingPPN=@authorizingPPN, authorizingPZ=@authorizingPZ, authorizingPNW=@authorizingPNW, controllerPPN=@controllerPPN
+                }
+                else if (this.Type == 2)
+                {
+                    sql = @"UPDATE tbWorkPermits SET number=@number, date=@date, hourFrom=@hourFrom, hourTo=@hourTo, description=@description, department=@department, place=@place, company=@company, companyPhone=@companyPhone, applicant=@applicant, holder=@holder, users=@users, authorizing=@authorizing, authorizingPPN=@authorizingPPN, authorizingPZ=@authorizingPZ, authorizingPNW=@authorizingPNW, controllerPPN=@controllerPPN
                                                       WHERE workPermitId=@id";
+                }
+
+                try
+                {
+                    using (SqlConnection conn = new SqlConnection(Variables.npdConnectionString))
+                    {
+                        SqlCommand sqlComand;
+                        using (sqlComand = new SqlCommand(sql, conn))
+                        {
+                            sqlComand.Parameters.AddWithValue("@number", this.Number);
+                            sqlComand.Parameters.AddWithValue("@date", this.Date.ToString());
+                            sqlComand.Parameters.AddWithValue("@hourFrom", this.HourFrom);
+                            sqlComand.Parameters.AddWithValue("@hourTo", this.HourTo);
+                            sqlComand.Parameters.AddWithValue("@description", this.Description);
+                            sqlComand.Parameters.AddWithValue("@department", this.Department);
+                            sqlComand.Parameters.AddWithValue("@place", this.Place);
+                            sqlComand.Parameters.AddWithValue("@company", this.CompanyName);
+                            sqlComand.Parameters.AddWithValue("@companyPhone", this.CompanyPhone);
+                            sqlComand.Parameters.AddWithValue("@applicant", this.Applicant);
+                            sqlComand.Parameters.AddWithValue("@holder", this.Holder);
+                            sqlComand.Parameters.AddWithValue("@users", this.GetUsers());
+                            sqlComand.Parameters.AddWithValue("@authorizing", this.Authorizing);
+                            sqlComand.Parameters.AddWithValue("@authorizingPPN", this.AuthorizingPPN);
+                            sqlComand.Parameters.AddWithValue("@authorizingPZ", this.AuthorizingPZ);
+                            sqlComand.Parameters.AddWithValue("@authorizingPNW", this.AuthorizingPNW);
+                            sqlComand.Parameters.AddWithValue("@controllerPPN", this.ControllerPPN);
+                            if (this.Type == 1)
+                            {
+                                sqlComand.Parameters.AddWithValue("@dateAdded", DateTime.Now);
+                                conn.Open();
+                                this.WorkPermitId = (int)sqlComand.ExecuteScalar();
+                            }
+                            else
+                            {
+                                sqlComand.Parameters.AddWithValue("@id", this.WorkPermitId);
+                                conn.Open();
+                                sqlComand.ExecuteNonQuery();
+                            }
+
+
+                        }
+                    }
+                    SaveChecks();
+                    MessageBox.Show("Zapis zakończony powodzeniem!");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message.ToString());
+                }
+                finally
+                {
+                    initialState = this.Clone();
+                    InitialChecks = this.CheckKeeper.CloneJson<WorkPermitCheckKeeper>();
+                }
             }
             
-            try
-            {
-                using (SqlConnection conn = new SqlConnection(Variables.npdConnectionString))
-                {
-                    SqlCommand sqlComand;
-                    using (sqlComand = new SqlCommand(sql, conn))
-                    {
-                        sqlComand.Parameters.AddWithValue("@number", this.Number);
-                        sqlComand.Parameters.AddWithValue("@date", this.Date.ToString());
-                        sqlComand.Parameters.AddWithValue("@hourFrom", this.HourFrom);
-                        sqlComand.Parameters.AddWithValue("@hourTo", this.HourTo);
-                        sqlComand.Parameters.AddWithValue("@description", this.Description);
-                        sqlComand.Parameters.AddWithValue("@department", this.Department);
-                        sqlComand.Parameters.AddWithValue("@place", this.Place);
-                        sqlComand.Parameters.AddWithValue("@company", this.CompanyName);
-                        sqlComand.Parameters.AddWithValue("@companyPhone", this.CompanyPhone);
-                        sqlComand.Parameters.AddWithValue("@applicant", this.Applicant);
-                        sqlComand.Parameters.AddWithValue("@holder", this.Holder);
-                        sqlComand.Parameters.AddWithValue("@users", this.GetUsers());
-                        sqlComand.Parameters.AddWithValue("@authorizing", this.Authorizing);
-                        sqlComand.Parameters.AddWithValue("@authorizingPPN", this.AuthorizingPPN);
-                        sqlComand.Parameters.AddWithValue("@authorizingPZ", this.AuthorizingPZ);
-                        sqlComand.Parameters.AddWithValue("@authorizingPNW", this.AuthorizingPNW);
-                        sqlComand.Parameters.AddWithValue("@controllerPPN", this.ControllerPPN);
-                        if (this.Type == 1)
-                        {
-                            sqlComand.Parameters.AddWithValue("@dateAdded", DateTime.Now);
-                            conn.Open();
-                            this.WorkPermitId = (int)sqlComand.ExecuteScalar();
-                        }
-                        else
-                        {
-                            sqlComand.Parameters.AddWithValue("@id", this.WorkPermitId);
-                            conn.Open();
-                            sqlComand.ExecuteNonQuery();
-                        }
-                        
-                        
-                    }
-                }
-                SaveChecks();
-                MessageBox.Show("Zapis zakończony powodzeniem!");
-            }
-            catch(Exception ex)
-            { 
-                MessageBox.Show(ex.Message.ToString());
-            }
-            finally
-            {
-                initialState = this.Clone();
-                InitialChecks = this.CheckKeeper;
-            }
         }
 
         public void SaveChecks()

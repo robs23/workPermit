@@ -777,6 +777,7 @@
             this.Controls.Add(this.tplMain);
             this.Name = "dataFiller";
             this.Text = "Nowe pozwolenie";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.dataFiller_FormClosing);
             this.tplMain.ResumeLayout(false);
             this.tpl.ResumeLayout(false);
             this.tpl.PerformLayout();

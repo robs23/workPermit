@@ -150,5 +150,18 @@ namespace workPermit
         {
             this.Close();
         }
+
+        private void dataFiller_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            UpdateWP();
+            if (wp.isDirty)
+            {
+                DialogResult res = MessageBox.Show("Istnieją niezapisane zmiany, które mogą zostać utracone. Czy chcesz wyjść bez zapisywania zmian?", "Niezapisane zmiany", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+                if (res != DialogResult.OK)
+                {
+                    e.Cancel = true;
+                }
+            }
+        }
     }
 }
