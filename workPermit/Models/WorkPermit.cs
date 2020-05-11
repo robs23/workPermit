@@ -281,7 +281,7 @@ namespace workPermit
                 finally
                 {
                     initialState = this.Clone();
-                    InitialChecks = this.CheckKeeper.CloneJson<WorkPermitCheckKeeper>();
+                    InitialChecks = initialState.CheckKeeper;
                 }
             }
             

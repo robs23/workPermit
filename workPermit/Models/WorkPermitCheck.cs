@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -17,6 +18,7 @@ namespace workPermit.Models
         public int YPoint { get; set; }
         public DateTime CreatedOn { get; set; }
         public string Name { get; set; }
+        [JsonIgnore]
         public PictureBox Picture { get; set; }
         public Point Location
         {
