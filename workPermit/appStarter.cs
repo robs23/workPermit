@@ -10,21 +10,28 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Linq.Dynamic;
+using System.Threading;
 
 namespace workPermit
 {
     public partial class appStarter : Form
     {
         WorkPermitKeeper Keeper = new WorkPermitKeeper();
+        bool IsSearched = false;
+        Task SearchTask = null;
+        CancellationTokenSource Cts;
+        SynchronizationContext SyncContext;
         public appStarter()
         {
             InitializeComponent();
+            SyncContext = SynchronizationContext.Current;
             this.KeyPreview = true;
         }
 
         private void fillTable(List<WorkPermit>Permits = null)
         {
-            
+
             if (Permits == null)
             {
                 dgWorkPermits.DataSource = null;
@@ -33,6 +40,11 @@ namespace workPermit
                 Permits = Keeper.WorkPermits;
             }
             dgWorkPermits.DataSource = Permits;
+            
+        }
+
+        private void Beautify()
+        {
             dgWorkPermits.Columns[0].HeaderText = "ID";
             dgWorkPermits.Columns[1].HeaderText = "Data";
             dgWorkPermits.Columns[2].Visible = false;
@@ -45,39 +57,88 @@ namespace workPermit
             dgWorkPermits.Columns[9].Visible = false;
             dgWorkPermits.Columns[10].HeaderText = "Wnioskujący";
             dgWorkPermits.Columns[11].HeaderText = "Posiadacz";
-            dgWorkPermits.Columns[12].Visible = false;
-            dgWorkPermits.Columns[13].HeaderText = "Dodano";
+            dgWorkPermits.Columns[12].HeaderText = "Zatwierdził";
+            dgWorkPermits.Columns[13].HeaderText = "Dodał";
+            dgWorkPermits.Columns[14].Visible = false;
+            dgWorkPermits.Columns[15].Visible = false;
+            dgWorkPermits.Columns[16].Visible = false;
+            dgWorkPermits.Columns[17].HeaderText = "Data dodania";
+            dgWorkPermits.Columns[18].Visible = false;
+            dgWorkPermits.Columns[19].Visible = false;
+            dgWorkPermits.Columns[20].Visible = false;
+            dgWorkPermits.Columns[21].Visible = false;
+            dgWorkPermits.Columns[22].Visible = false;
             dgWorkPermits.DefaultCellStyle.Font = new Font("Arial", 12);
             dgWorkPermits.ColumnHeadersDefaultCellStyle.Font = new Font("Arial", 12);
-            dgWorkPermits.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            dgWorkPermits.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.ColumnHeader;
+            dgWorkPermits.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgWorkPermits.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgWorkPermits.Columns[6].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgWorkPermits.Columns[7].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgWorkPermits.Columns[8].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
         }
 
         private void formLoaded(object sender, EventArgs e)
         {
             fillTable();
+            SetupDataBinding();
+            Beautify();
             txtSearch.Text = "Szukaj..";
             txtSearch.ForeColor = Color.Gray;
             txtSearch.BorderStyle = BorderStyle.Fixed3D;
         }
-        
+
+        private void SetupDataBinding()
+        {
+            Keeper.Filtered = Keeper.WorkPermits;
+
+            dgWorkPermits.DataBindings.Clear();
+            dgWorkPermits.DataSource = null;
+            dgWorkPermits.DataSource = Keeper.WorkPermits;
+            dgWorkPermits.AutoResizeRows();
+        }
+
         private void UpdateSearch(string str = "")
         {
             if  (!str.Contains("Szukaj"))
             {
-                if (str.Length > 1)
+                if (str.Length > 0)
                 {
-                    List<WorkPermit> Permits = new List<WorkPermit>();
-                    var pers = Keeper.WorkPermits.Where(c => c.Applicant.ToLower().Contains(str) || c.Authorizing.ToLower().Contains(str) || c.CompanyName.ToLower().Contains(str) || c.CompanyPhone.ToLower().Contains(str) || c.Date.ToString().Contains(str) || c.Place.ToLower().Contains(str) || c.Holder.ToLower().Contains(str) || c.Department.ToLower().Contains(str) || c.Description.ToLower().Contains(str) || c.Number.ToLower().Contains(str) || c.GetUsers().Contains(str));
-                    foreach (var p in pers)
+                    IsSearched = true;
+                    if (SearchTask != null)
                     {
-                        Permits.Add(p);
+                        //there's active task, lets cancel it before triggering new one
+                        Cts.Cancel();
                     }
-                    fillTable(Permits);
+                    Cts = new CancellationTokenSource();
+                    SearchTask = Search(str, Cts.Token);
                 }
                 else
                 {
-                    fillTable();
+                    if (IsSearched)
+                    {
+                        fillTable();
+                        SetupDataBinding();
+                        Beautify();
+                        IsSearched = false;
+                    }
                 }
+                
+            }
+            
+        }
+
+        private async Task Search(string str, CancellationToken token)
+        {
+            await Task.Delay(1000);
+            if (!token.IsCancellationRequested)
+            {
+                //SynchronizationContext.SetSynchronizationContext(SyncContext);
+                var pers = Keeper.WorkPermits.Where(c => c.Applicant.ToLower().Contains(str) || c.Authorizing.ToLower().Contains(str) || c.CompanyName.ToLower().Contains(str) || c.CompanyPhone.ToLower().Contains(str) || c.Date.ToString().Contains(str) || c.Place.ToLower().Contains(str) || c.Holder.ToLower().Contains(str) || c.Department.ToLower().Contains(str) || c.Description.ToLower().Contains(str) || c.Number.ToLower().Contains(str));
+                List<WorkPermit> Permits = new List<WorkPermit>(pers);
+                fillTable(Permits);
+                //SetupDataBinding();
+                Beautify();
             }
             
         }
@@ -116,6 +177,8 @@ namespace workPermit
         {
             Keeper.Download();
             fillTable();
+            SetupDataBinding();
+            Beautify();
         }
 
         private void UpdateSearch(object sender, EventArgs e)
@@ -224,6 +287,166 @@ namespace workPermit
             }
             
 #endif
+        }
+
+        private void dgWorkPermits_SortStringChanged(object sender, Zuby.ADGV.AdvancedDataGridView.SortEventArgs e)
+        {
+            ApplySort();
+        }
+
+        private void ApplySort()
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(dgWorkPermits.SortString) == true)
+                    return;
+
+                var sortStr = dgWorkPermits.SortString.Replace("[", "").Replace("]", "");
+
+                if (string.IsNullOrEmpty(dgWorkPermits.FilterString) == true)
+                {
+                    // the grid is not filtered!
+                    Keeper.WorkPermits = Keeper.WorkPermits.OrderBy(sortStr).ToList();
+                    dgWorkPermits.DataSource = Keeper.WorkPermits;
+                }
+                else
+                {
+                    // the grid is filtered!
+                    Keeper.Filtered = Keeper.Filtered.OrderBy(sortStr).ToList();
+                    dgWorkPermits.DataSource = Keeper.Filtered;
+                }
+
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+
+        private void dgWorkPermits_FilterStringChanged(object sender, Zuby.ADGV.AdvancedDataGridView.FilterEventArgs e)
+        {
+            ApplyFilter();
+        }
+
+        private void ApplyFilter()
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(dgWorkPermits.FilterString) == true)
+                {
+                    dgWorkPermits.DataSource = Keeper.WorkPermits;
+                    Keeper.Filtered = Keeper.WorkPermits;
+                }
+                else
+                {
+                    var listfilter = FilterStringConverter(dgWorkPermits.FilterString);
+
+                    Keeper.Filtered = Keeper.Filtered.Where(listfilter).ToList();
+
+                    dgWorkPermits.DataSource = Keeper.Filtered;
+
+                }
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+
+        private string FilterStringConverter(string filter)
+        {
+            string newColFilter = "";
+
+            filter = filter.Replace("(", "").Replace(")", "");
+
+            var colFilterList = filter.Split(new string[] { "AND" }, StringSplitOptions.None);
+
+            string andOperator = "";
+
+            foreach (var colFilter in colFilterList)
+            {
+                newColFilter += andOperator;
+
+                var colName = "";
+
+                // Step 1: BOOLEAN Check 
+                if (colFilter.Contains(" IN ") == false && colFilter.Split('=').Length == 2)
+                {
+                    // if the filter string is in the form "ColumnName=value". example = "(InAlarm != null && (InAlarm == true))";
+                    colName = colFilter.Split('=')[0];
+                    var booleanVal = colFilter.Split('=')[1];
+
+                    newColFilter += $"({colName} != null && ({colName} == {booleanVal}))";
+
+                    continue;
+                }
+
+                // Step 2: NUMBER (int/decimal/double/etc) and STRING Check
+                if (colFilter.Contains(" IN ") == true)
+                {
+                    var temp1 = colFilter.Trim().Split(new string[] { "IN" }, StringSplitOptions.None);
+
+                    colName = GetStringBetweenChars(temp1[0], '[', ']');
+
+                    var filterValsList = temp1[1].Split(',');
+
+                    newColFilter += string.Format("({0} != null && (", colName);
+
+                    string orOperator = "";
+
+                    foreach (var filterVal in filterValsList)
+                    {
+                        double tempNum = 0;
+                        if (Double.TryParse(filterVal, out tempNum))
+                            newColFilter += string.Format("{0} {1} = {2}", orOperator, colName, filterVal.Trim());
+                        else
+                            newColFilter += string.Format("{0} {1}.Contains({2})", orOperator, colName, filterVal.Trim());
+
+                        orOperator = " OR ";
+                    }
+
+                    newColFilter += "))";
+                }
+
+                // Step 3: DATETIME Check
+                if (colFilter.Contains(" LIKE ") == true && colFilter.Contains("Convert[") == true)
+                {
+                    // first of all remove the cast
+                    var colFilterNoCast = colFilter.Replace("Convert", "").Replace(", 'System.String'", "");
+
+                    var filterValsList = colFilterNoCast.Trim().Split(new string[] { "OR" }, StringSplitOptions.None);
+
+                    colName = GetStringBetweenChars(filterValsList[0], '[', ']');
+
+                    newColFilter += string.Format("({0} != null && (", colName);
+
+                    string orOperator = "";
+
+                    foreach (var filterVal in filterValsList)
+                    {
+                        var v = GetStringBetweenChars(filterVal, '%', '%');
+
+                        newColFilter += string.Format("{0} {1}.Date = DateTime.Parse('{2}')", orOperator, colName, v.Trim());
+
+                        orOperator = " OR ";
+                    }
+
+                    newColFilter += "))";
+                }
+
+                andOperator = " AND ";
+            }
+
+            return newColFilter.Replace("'", "\"");
+        }
+
+        private string GetStringBetweenChars(string input, char startChar, char endChar)
+        {
+            string output = input.Split(startChar, endChar)[1];
+            return output;
+        }
+
+        private void btnClearFilter_Click(object sender, EventArgs e)
+        {
+            dgWorkPermits.CleanFilter();
         }
     }
 }

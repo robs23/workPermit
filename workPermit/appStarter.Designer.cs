@@ -28,33 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(appStarter));
-            this.dgWorkPermits = new System.Windows.Forms.DataGridView();
             this.tplMain = new System.Windows.Forms.TableLayoutPanel();
             this.tlpControls = new System.Windows.Forms.TableLayoutPanel();
+            this.txtSearch = new System.Windows.Forms.TextBox();
+            this.dgWorkPermits = new Zuby.ADGV.AdvancedDataGridView();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnRefresh = new System.Windows.Forms.Button();
-            this.txtSearch = new System.Windows.Forms.TextBox();
-            ((System.ComponentModel.ISupportInitialize)(this.dgWorkPermits)).BeginInit();
+            this.btnClearFilter = new System.Windows.Forms.Button();
             this.tplMain.SuspendLayout();
             this.tlpControls.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgWorkPermits)).BeginInit();
             this.SuspendLayout();
-            // 
-            // dgWorkPermits
-            // 
-            this.dgWorkPermits.AllowDrop = true;
-            this.dgWorkPermits.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgWorkPermits.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgWorkPermits.Location = new System.Drawing.Point(3, 43);
-            this.dgWorkPermits.Name = "dgWorkPermits";
-            this.dgWorkPermits.ReadOnly = true;
-            this.dgWorkPermits.Size = new System.Drawing.Size(513, 381);
-            this.dgWorkPermits.TabIndex = 1;
-            this.dgWorkPermits.CellContextMenuStripNeeded += new System.Windows.Forms.DataGridViewCellContextMenuStripNeededEventHandler(this.rightClicked);
-            this.dgWorkPermits.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.bringWorkPermit);
             // 
             // tplMain
             // 
@@ -78,7 +66,8 @@
             this.tlpControls.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tlpControls.ColumnCount = 4;
+            this.tlpControls.ColumnCount = 5;
+            this.tlpControls.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tlpControls.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tlpControls.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tlpControls.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 50F));
@@ -86,47 +75,14 @@
             this.tlpControls.Controls.Add(this.btnAdd, 0, 0);
             this.tlpControls.Controls.Add(this.btnDelete, 1, 0);
             this.tlpControls.Controls.Add(this.btnRefresh, 2, 0);
-            this.tlpControls.Controls.Add(this.txtSearch, 3, 0);
+            this.tlpControls.Controls.Add(this.txtSearch, 4, 0);
+            this.tlpControls.Controls.Add(this.btnClearFilter, 3, 0);
             this.tlpControls.Location = new System.Drawing.Point(3, 3);
             this.tlpControls.Name = "tlpControls";
             this.tlpControls.RowCount = 1;
             this.tlpControls.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpControls.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 34F));
             this.tlpControls.Size = new System.Drawing.Size(513, 34);
             this.tlpControls.TabIndex = 0;
-            // 
-            // btnAdd
-            // 
-            this.btnAdd.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnAdd.Image = ((System.Drawing.Image)(resources.GetObject("btnAdd.Image")));
-            this.btnAdd.Location = new System.Drawing.Point(9, 5);
-            this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(32, 23);
-            this.btnAdd.TabIndex = 0;
-            this.btnAdd.UseVisualStyleBackColor = true;
-            this.btnAdd.Click += new System.EventHandler(this.addPermit);
-            // 
-            // btnDelete
-            // 
-            this.btnDelete.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnDelete.Image = ((System.Drawing.Image)(resources.GetObject("btnDelete.Image")));
-            this.btnDelete.Location = new System.Drawing.Point(59, 5);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(32, 23);
-            this.btnDelete.TabIndex = 1;
-            this.btnDelete.UseVisualStyleBackColor = true;
-            this.btnDelete.Click += new System.EventHandler(this.Remove);
-            // 
-            // btnRefresh
-            // 
-            this.btnRefresh.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnRefresh.Image = ((System.Drawing.Image)(resources.GetObject("btnRefresh.Image")));
-            this.btnRefresh.Location = new System.Drawing.Point(109, 5);
-            this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(32, 23);
-            this.btnRefresh.TabIndex = 2;
-            this.btnRefresh.UseVisualStyleBackColor = true;
-            this.btnRefresh.Click += new System.EventHandler(this.Refresh);
             // 
             // txtSearch
             // 
@@ -140,6 +96,71 @@
             this.txtSearch.Enter += new System.EventHandler(this.searchActive);
             this.txtSearch.Leave += new System.EventHandler(this.searchInactive);
             // 
+            // dgWorkPermits
+            // 
+            this.dgWorkPermits.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgWorkPermits.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgWorkPermits.FilterAndSortEnabled = true;
+            this.dgWorkPermits.Location = new System.Drawing.Point(3, 43);
+            this.dgWorkPermits.Name = "dgWorkPermits";
+            this.dgWorkPermits.ReadOnly = true;
+            this.dgWorkPermits.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.dgWorkPermits.Size = new System.Drawing.Size(513, 381);
+            this.dgWorkPermits.TabIndex = 1;
+            this.dgWorkPermits.SortStringChanged += new System.EventHandler<Zuby.ADGV.AdvancedDataGridView.SortEventArgs>(this.dgWorkPermits_SortStringChanged);
+            this.dgWorkPermits.FilterStringChanged += new System.EventHandler<Zuby.ADGV.AdvancedDataGridView.FilterEventArgs>(this.dgWorkPermits_FilterStringChanged);
+            this.dgWorkPermits.CellContextMenuStripNeeded += new System.Windows.Forms.DataGridViewCellContextMenuStripNeededEventHandler(this.rightClicked);
+            this.dgWorkPermits.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.bringWorkPermit);
+            // 
+            // btnAdd
+            // 
+            this.btnAdd.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnAdd.Image = ((System.Drawing.Image)(resources.GetObject("btnAdd.Image")));
+            this.btnAdd.Location = new System.Drawing.Point(9, 5);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(32, 23);
+            this.btnAdd.TabIndex = 0;
+            this.toolTip1.SetToolTip(this.btnAdd, "Utwórz nowe pozwolenie");
+            this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.addPermit);
+            // 
+            // btnDelete
+            // 
+            this.btnDelete.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnDelete.Image = ((System.Drawing.Image)(resources.GetObject("btnDelete.Image")));
+            this.btnDelete.Location = new System.Drawing.Point(59, 5);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(32, 23);
+            this.btnDelete.TabIndex = 1;
+            this.toolTip1.SetToolTip(this.btnDelete, "Usuń zaznaczone wiersze");
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.Remove);
+            // 
+            // btnRefresh
+            // 
+            this.btnRefresh.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnRefresh.Image = ((System.Drawing.Image)(resources.GetObject("btnRefresh.Image")));
+            this.btnRefresh.Location = new System.Drawing.Point(109, 5);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(32, 23);
+            this.btnRefresh.TabIndex = 2;
+            this.toolTip1.SetToolTip(this.btnRefresh, "Odśwież");
+            this.btnRefresh.UseVisualStyleBackColor = true;
+            this.btnRefresh.Click += new System.EventHandler(this.Refresh);
+            // 
+            // btnClearFilter
+            // 
+            this.btnClearFilter.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnClearFilter.Image = global::workPermit.Properties.Resources.clear_filter_16;
+            this.btnClearFilter.Location = new System.Drawing.Point(153, 5);
+            this.btnClearFilter.Name = "btnClearFilter";
+            this.btnClearFilter.Size = new System.Drawing.Size(44, 23);
+            this.btnClearFilter.TabIndex = 4;
+            this.btnClearFilter.UseVisualStyleBackColor = true;
+            this.btnClearFilter.Click += new System.EventHandler(this.btnClearFilter_Click);
+            // 
             // appStarter
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -152,10 +173,10 @@
             this.Load += new System.EventHandler(this.formLoaded);
             this.Shown += new System.EventHandler(this.appStarter_Shown);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FormKeyDown);
-            ((System.ComponentModel.ISupportInitialize)(this.dgWorkPermits)).EndInit();
             this.tplMain.ResumeLayout(false);
             this.tlpControls.ResumeLayout(false);
             this.tlpControls.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgWorkPermits)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -168,6 +189,8 @@
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnRefresh;
         private System.Windows.Forms.TextBox txtSearch;
-        private System.Windows.Forms.DataGridView dgWorkPermits;
+        private Zuby.ADGV.AdvancedDataGridView dgWorkPermits;
+        private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.Button btnClearFilter;
     }
 }

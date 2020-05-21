@@ -11,25 +11,28 @@ namespace workPermit
     public class WorkPermitKeeper
     {
         public List<WorkPermit> WorkPermits { get; set; }
+        public List<WorkPermit> Filtered { get; set; }
 
         public WorkPermitKeeper(List<WorkPermit> permits)
         {
             WorkPermits = new List<WorkPermit>();
+            Filtered = null;
             WorkPermits = permits;
         }
 
         public WorkPermitKeeper()
         {
             WorkPermits = new List<WorkPermit>();
+            Filtered = null;
             Download();
         }
 
         
 
-        public void Download()
+        public void  Download()
         {
             WorkPermits.Clear();
-            string sql = "SELECT * FROM tbWorkPermits ORDER BY dateAdded DESC;";
+            string sql = "SELECT * FROM tbWorkPermits ORDER BY date DESC;";
 
             try
             {

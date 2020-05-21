@@ -63,6 +63,26 @@ namespace workPermit.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap clear_filter_16 {
+            get {
+                object obj = ResourceManager.GetObject("clear_filter_16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap clear_filter_24 {
+            get {
+                object obj = ResourceManager.GetObject("clear_filter_24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap rubber_16 {
             get {
                 object obj = ResourceManager.GetObject("rubber_16", resourceCulture);
