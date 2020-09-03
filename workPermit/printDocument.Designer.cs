@@ -53,7 +53,6 @@
             this.txtHolderCompany = new System.Windows.Forms.TextBox();
             this.txtHolderPhone = new System.Windows.Forms.TextBox();
             this.txtHolderName = new System.Windows.Forms.TextBox();
-            this.txtPerminNumber = new System.Windows.Forms.TextBox();
             this.txtApplicantPhone = new System.Windows.Forms.TextBox();
             this.txtApplicant = new System.Windows.Forms.TextBox();
             this.txtHourTo = new System.Windows.Forms.TextBox();
@@ -100,7 +99,6 @@
             this.pnlP1.Controls.Add(this.txtHolderCompany);
             this.pnlP1.Controls.Add(this.txtHolderPhone);
             this.pnlP1.Controls.Add(this.txtHolderName);
-            this.pnlP1.Controls.Add(this.txtPerminNumber);
             this.pnlP1.Controls.Add(this.txtApplicantPhone);
             this.pnlP1.Controls.Add(this.txtApplicant);
             this.pnlP1.Controls.Add(this.txtHourTo);
@@ -345,20 +343,6 @@
             this.txtHolderName.TabIndex = 9;
             this.txtHolderName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // txtPerminNumber
-            // 
-            this.txtPerminNumber.BackColor = System.Drawing.SystemColors.Window;
-            this.txtPerminNumber.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtPerminNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.txtPerminNumber.Location = new System.Drawing.Point(886, 97);
-            this.txtPerminNumber.Name = "txtPerminNumber";
-            this.txtPerminNumber.ReadOnly = true;
-            this.txtPerminNumber.Size = new System.Drawing.Size(79, 15);
-            this.txtPerminNumber.TabIndex = 8;
-            this.txtPerminNumber.TabStop = false;
-            this.txtPerminNumber.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.txtPerminNumber.Visible = false;
-            // 
             // txtApplicantPhone
             // 
             this.txtApplicantPhone.BorderStyle = System.Windows.Forms.BorderStyle.None;
@@ -530,7 +514,6 @@
         private System.Windows.Forms.TextBox txtHolderCompany;
         private System.Windows.Forms.TextBox txtHolderPhone;
         private System.Windows.Forms.TextBox txtHolderName;
-        private System.Windows.Forms.TextBox txtPerminNumber;
         private System.Windows.Forms.TextBox txtWorkDescription;
         private System.Windows.Forms.Panel pnlP2;
         private System.Windows.Forms.PictureBox pBox2;

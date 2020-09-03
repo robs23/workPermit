@@ -54,7 +54,7 @@ namespace workPermit
             txtDate1.Text = thisPermit.Date.ToShortDateString();
             txtDate2.Text = thisPermit.Date.ToShortDateString();
             txtHolderPhone.Text = thisPermit.CompanyPhone;
-            txtPerminNumber.Text = thisPermit.Number;
+            //txtPerminNumber.Text = thisPermit.Number;
             txtWorkDescription.Text = thisPermit.Description;
             SetUsers();
             pc = new printController(this);
